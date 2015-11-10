@@ -1,0 +1,76 @@
+<div class="container-fluid" data-ng-controller="draftsim as vm">
+
+    <div class="row">
+        <div ng-include data-src="'/app/adverts/amazonadverts.html'"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 addRowMargins fullView" ng-class="{'col-md-8 col-lg-9': !vm.chartsHidden, 'col-md-12 col-lg-12': vm.chartsHidden }">
+
+            <div class="normalPanel">
+                <set-selection set-groups="vm.setGroups" />
+            </div>
+
+            <div class="textcenter">
+                <button ng-click="vm.startDraft()" class="chris-btn">
+                    <span ng-if="!vm.draftStarted">Start Draft</span>
+                    <span ng-if="vm.draftStarted">Restart Draft</span>
+                </button>
+                <button class="btn chris-btn" ng-click="vm.showCharts()" ng-show="vm.chartsHidden">
+                    Show Charts <i class="icon-chevron-down"></i>
+                </button>
+            </div>
+
+            <div ng-if="vm.boosterCards.length > 0 && !vm.draftFinished">
+                <card-display card-click="vm.addToDeck(card)" cards="vm.boosterCards" title="{{vm.topPanelCardsTitle}} ({{vm.boosterCards.length}})" />
+            </div>
+
+            <div ng-if="vm.boosterCards.length == 0 && vm.draftFinished">
+                <card-display card-click="vm.deckCardClick(card)"
+                              cards="vm.deckCards"
+                              land-cards="vm.selectedLandCards"
+                              land-card-click="vm.removeLandCard(card)"
+                              title="{{vm.topPanelCardsTitle}} ({{vm.deckCards.length + vm.selectedLandCards.length}})"
+                              instructions="The draft is complete. You can build a deck with the cards by clicking a card in your pool." />
+            </div>
+
+
+            <div class="row" ng-if="vm.draftFinished">
+                <div class="col-xs-12 col-lg-push-4 col-lg-4 textcenter">
+                    <hand-simulator selected-cards="vm.deckCards"
+                                    selected-land-cards="vm.selectedLandCards"
+                                    controller-id="{{vm.controllerId}}" />
+                </div>
+                <div class="col-xs-6 col-lg-pull-4 col-lg-4 saveButtons">
+                    <button class="pull-left chris-btn chris-btn-mini" ng-click="vm.downloadDraftDeck()">Save My Deck <i class="icon-save"></i></button>
+                </div>
+                <div class="col-xs-6 col-lg-4 saveButtons" style="text-align:right;">
+                    <button class="pull-right chris-btn chris-btn-mini" ng-click="vm.downloadFullPool()">Save Full Pool <i class="icon-save"></i></button>
+                </div>
+            </div>
+
+            <div ng-if="vm.draftStarted">
+                <card-display title="Card Pool ({{vm.selectedCards.length}})"
+                              card-click="vm.cardPoolClick(card)"
+                              cards="vm.selectedCards"
+                              land-cards="vm.landcards"
+                              land-card-click="vm.landCardClick(card)" />
+            </div>
+
+            <div class="hidden-xs hidden-sm" ng-if="vm.boosterCards.length == 0 && vm.draftFinished" data-ng-repeat="ai in vm.AIs" ng-show="!$first">
+                <card-display title="AI {{ai.name}} Choices"
+                              cards="ai.cards"/>
+            </div>
+
+        </div>
+
+        <div>
+            <pool-summary-charts top-card-stats-title="vm.cardStatsTitle"
+                                top-graph-cards="vm.cardsToGraph"
+                                 controller-id="vm.controllerId"
+                                 charts-hidden="vm.chartsHidden" />
+        </div>
+    </div>
+
+
+</div>

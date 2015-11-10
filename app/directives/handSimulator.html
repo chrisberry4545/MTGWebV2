@@ -1,0 +1,35 @@
+﻿<button class="chris-btn" ng-click="openHandSimulator()">
+    Try a test hand
+</button>
+
+<script type="text/ng-template" id="handmodal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" style="display:inline-block;">Test Hand</h3>
+        <button style="float:right; border:0; background:0;" ng-click="cancel()">X</button>
+    </div>
+    <div class="modal-body">
+
+        <div class="widget wmtg">
+            <div class="widget-content text-center text-info">
+                <ul class="today-datas">
+                    <li data-ng-repeat="card in handCards track by $index">
+                        <img src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer textcenter">
+        <div class="row">
+            <div class="col-xs-12 col-lg-4 textcenter">
+                <button class="modalButton chris-btn" ng-click="mulligan()">Mulligan</button>
+            </div>
+            <div class="col-xs-12 col-lg-4 textcenter">
+                <button class="modalButton chris-btn" ng-click="nextCard()">Draw a card</button>
+            </div>
+            <div class="col-xs-12 col-lg-4 textcenter">
+                <button class="modalButton chris-btn" ng-click="generateNewHand()">New hand</button>
+            </div>
+        </div>
+    </div>
+</script>

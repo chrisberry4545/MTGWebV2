@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:300,500,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css" />
+  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.layouts.min.css" />
+  <link rel="stylesheet" href="css/app.css" />
+
+</head>
+<body ng-app="mtgApp" ng-cloak >
+
+  <div ng-controller="sidebar">
+    <md-toolbar md-scroll-shrink ng-if="true" class="topBanner">
+      <div class="md-toolbar-tools">
+        <h3>
+          MTG Mirror
+        </h3>
+        <button ng-click="toggleMenu()">TEST</button>
+      </div>
+    </md-toolbar>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+
+        <md-toolbar class="md-theme-light">
+          <h2 class="md-toolbar-tools">Sidenav Right</h2>
+          <md-button ng-click="close()" class="md-primary">
+            Close Sidenav Right
+          </md-button>
+        </md-toolbar>
+        <md-content layout-padding>
+          <ul>
+              <li data-ng-class="isCurrent(r)"
+                  data-ng-repeat="r in navRoutes">
+                  <a href="#{{r.url}}">{{r.config.settings.content}}</a>
+              </li>
+          </ul>
+        </md-content>
+
+    </md-sidenav>
+  </div>
+
+  <div ng-view></div>
+
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-47296152-1']);
+        _gaq.push(['_setDomainName', 'mtgmirror.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        function trackPageView(page, eventName, label) {
+            trackAction('_trackPageview', page, eventName, label);
+        }
+        function trackEvent(page, eventName, label) {
+            trackAction('_trackEvent', page, eventName, label);
+        }
+        function trackAction(actionType, page, eventName, label) {
+            _gaq.push([actionType, page, eventName, label])
+        }
+    </script>
+
+  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="./bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/angular-route/angular-route.min.js"></script>
+  <script src="./bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="./bower_components/angular-aria/angular-aria.min.js"></script>
+  <script type="text/javascript" src="./bower_components/angular-material/angular-material.min.js"></script>
+  <script type="text/javascript" src="./bower_components/Chart.js/Chart.min.js"></script>
+
+  <script src="./app/app.js"> </script>
+  <script src="./app/config/routes.js"></script>
+  <script src="./app/sidebar.js"></script>
+  <script src="./app/startScreen/startScreen.js"></script>
+  <script src="./app/draftsim/draftsim.js"></script>
+
+  <!--Services-->
+  <script src="./app/services/datacontext.js"></script>
+  <script src="./app/services/deckFunctions.js"></script>
+  <script src="./app/services/downloadDataService.js"></script>
+  <script src="./app/services/graphAnalysis.js"></script>
+  <script src="./app/services/landcards.js"></script>
+  <script src="./app/services/localStorageService.js"></script>
+  <script src="./app/services/ai.js"></script>
+
+  <!--Directives-->
+  <script src="./app/directives/cardDisplay.js"></script>
+  <script src="./app/directives/handSimulator.js"></script>
+  <script src="./app/directives/poolSummaryCharts.js"></script>
+  <script src="./app/directives/setSelection.js"></script>
+
+  <!-- Card Data -->
+  <script src="./app/carddata/CardsBFZ.js"></script>
+  <script src="./app/carddata/CardsBNG.js"></script>
+  <script src="./app/carddata/CardsDTK.js"></script>
+  <script src="./app/carddata/CardsExpeditionsBFZ.js"></script>
+  <script src="./app/carddata/CardsFRF.js"></script>
+  <script src="./app/carddata/CardsJOU.js"></script>
+  <script src="./app/carddata/CardsKTK.js"></script>
+  <script src="./app/carddata/CardsM15.js"></script>
+  <script src="./app/carddata/CardsMM2.js"></script>
+  <script src="./app/carddata/CardsORI.js"></script>
+  <script src="./app/carddata/CardsTHS.js"></script>
+
+
+
+</body>
+
+</html>

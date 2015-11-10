@@ -1,0 +1,89 @@
+$mdWidth: 750px;
+$lgWidth: 1000px;
+
+$lightBackgroundColor: rgb(235,235,252);
+$cardBackgroundColor: rgb(255,255,255);
+
+
+body, html {
+  margin:0;
+  font-family: 'Roboto', sans-serif;
+  overflow-x:hidden;
+}
+body {
+  background-color: $lightBackgroundColor;
+}
+
+h2 {
+  font-weight: 300;
+}
+button {
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+}
+.widthAuto {
+  width: auto;
+}
+.marginAuto {
+  margin:auto;
+}
+.center {
+  text-align: center;
+}
+.centerInParent {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+}
+
+
+.topBanner {
+  width:100vw;
+  background:grey;
+
+  h2 {
+    display:inline-block;
+  }
+  ul {
+    display:inline-block;
+    list-style:none;
+
+    li {
+      display:inline-block;
+      &:after {
+        content: '|';
+      }
+
+      &:last-child:after {
+        content: ''
+      }
+    }
+  }
+}
+
+.card {
+  background-color: $cardBackgroundColor;
+  padding:2rem;
+  margin: 1rem auto 1rem auto;
+}
+.bigCard {
+  max-width: 1000px;
+}
+
+.bigBtn {
+  height:5rem;
+  width: 14rem;
+}
+
+.mainImage {
+  display:none;
+
+  @media(min-width: $mdWidth) {
+    display:block;
+  }
+}
+.mainBtns {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
