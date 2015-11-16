@@ -1,0 +1,85 @@
+﻿<section class="mainbar" data-ng-controller="sealedsim as vm">
+    <section class="matter">
+        <div class="container-fluid">
+            <div class="row">
+                <div ng-include data-src="'/app/adverts/amazonadverts.html'"></div>
+            </div>
+
+            <div class="row">
+
+                <div id="mainCol" class="cardColumn" ng-class="{'col-md-8 col-lg-9': !vm.chartsHidden, 'col-md-12 col-lg-12': vm.chartsHidden }">
+
+                    <div class="normalPanel">
+                        <set-selection set-groups="vm.setGroups">
+                         <div style="padding-top:1rem;">
+                             <select ng-options="item.value as item.text for item in vm.promo_options" ng-model="vm.include_promo">
+                             </select>
+                         </div>
+                        </set-selection>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-push-4 col-lg-4 textcenter">
+                            <button class="chris-btn" ng-click="vm.openBoosters()">Open Boosters</button>
+                        </div>
+                        <div class="col-xs-6 col-lg-pull-4 col-lg-4 saveButtons">
+                            <button class="chris-btn chris-btn-mini" ng-click="vm.saveSelection()">Save selection <i class="icon-save"></i></button>
+                        </div>
+                        <div class="col-xs-6 col-lg-4 saveButtons" style="text-align:right;">
+                            <button class="chris-btn chris-btn-mini" ng-click="vm.saveCompletePool()">Save pool <i class="icon-save"></i></button>
+
+                            <div ng-show="vm.chartsHidden">
+                                <button class="chris-btn chris-btn-mini" ng-click="vm.hideCharts()">Show Charts <i class="icon-chevron-down"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <card-display card-click="vm.addToDeck(card)"
+                                      cards="vm.boosterCards"
+                                      land-cards="vm.landcards"
+                                      land-card-click="vm.addLandCard(card)"
+                                      title="Cards from packs ({{vm.boosterCards.length}})" />
+                    </div>
+
+
+                    <div class="row textcenter">
+                        <div class="col-xs-12 col-lg-push-4 col-lg-4 textcenter">
+                            <hand-simulator selected-cards="vm.selectedCards"
+                                            selected-land-cards="vm.selectedLandCards"
+                                            controller-id="{{vm.controllerId}}" />
+                        </div>
+                        <div class="col-xs-6 col-lg-pull-4 col-lg-4"></div>
+                        <div class="col-xs-12 col-lg-4 saveButtons rightOnLg">
+                            <button class="chris-btn chris-btn-mini" ng-click="vm.clearSelection()">Clear Selection <i class="icon-remove"></i></button>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <card-display card-click="vm.removeFromDeck(card)"
+                                      cards="vm.selectedCards"
+                                      land-cards="vm.selectedLandCards"
+                                      land-card-click="vm.removeLandCard(card)"
+                                      title="Selected Cards ({{vm.selectedCards.length + vm.selectedLandCards.length}})" />
+                    </div>
+
+                </div>
+
+                <div class="graphColumn center">
+                    <pool-summary-charts top-card-stats-title="'Card Pool Stats'"
+                                         top-graph-cards="vm.boosterCards"
+                                         bottom-card-stats-title="'Selected Cards Stats'"
+                                         bottom-graph-cards="vm.selectedCards"
+                                         controller-id="vm.controllerId"
+                                         charts-hidden="vm.chartsHidden" />
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </section>
+</section>
