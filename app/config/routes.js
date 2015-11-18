@@ -41,7 +41,7 @@
                 url: '/sealedsim',
                 config: {
                     title: 'sealedsim',
-                    templateUrl: 'app/draftsim/draftsim.html',
+                    templateUrl: 'app/sealedsim/sealedsim.html',
                     settings: {
                         content: 'Sealed Simulator'
                     }
@@ -50,7 +50,7 @@
                 url: '/browsecards',
                 config: {
                     title: 'browsecards',
-                    templateUrl: 'app/draftsim/draftsim.html',
+                    templateUrl: 'app/browsecards/browsecards.html',
                     settings: {
                         content: 'Browse Cards'
                     }
@@ -59,7 +59,7 @@
                 url: '/boostersim',
                 config: {
                     title: 'boostersim',
-                    templateUrl: 'app/draftsim/draftsim.html',
+                    templateUrl: 'app/boostersim/boostersim.html',
                     settings: {
                         content: 'Booster Simulator'
                     }
@@ -68,7 +68,7 @@
                 url: '/about',
                 config: {
                     title: 'about',
-                    templateUrl: 'app/draftsim/draftsim.html',
+                    templateUrl: 'app/about/about.html',
                     settings: {
                         content: 'About'
                     }

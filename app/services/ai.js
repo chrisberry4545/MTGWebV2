@@ -18,8 +18,6 @@
 
             var cardToAdd;
             var cards = this.boosterCards;
-            console.log('colors');
-            console.log(this.colors);
             if (this.colors.length === 0) {
                 cardToAdd = this.noColorsProcess(cards);
             } else if (this.colors.length === 1) {

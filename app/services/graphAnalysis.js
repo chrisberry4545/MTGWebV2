@@ -49,6 +49,13 @@
         var costBarChart_highlightFill = highlightColor;
         var costBarChart_highlightStroke = highlightColor;
 
+        function getChartElement(getterFunc) {
+          var holder = getterFunc();
+          if (holder != null) {
+            return holder.firstChild.getContext("2d");
+          }
+          return null;
+        }
 
         var pieChartContainer;
         var pieChartWidth;
@@ -62,7 +69,7 @@
             return document.getElementById(pieChartContainer);
         }
         function getPieChartElement() {
-            return getPieChartHolder().firstChild.getContext("2d");
+          return getChartElement(getPieChartHolder);
         }
 
         var barChartContainer;
@@ -77,7 +84,7 @@
             return document.getElementById(barChartContainer);
         }
         function getBarChartElement() {
-            return getBarChartHolder().firstChild.getContext("2d");
+          return getChartElement(getBarChartHolder);
         }
 
         var typeChartContainer;
@@ -92,7 +99,7 @@
             return document.getElementById(typeChartContainer);
         }
         function getTypeChartElement() {
-            return getTypeChartHolder().firstChild.getContext("2d");
+          return getChartElement(getTypeChartHolder);
         }
 
         function resetAllCanvas() {
@@ -125,6 +132,8 @@
         }
 
         function setUpTypeBarChart(typeData) {
+          var el = getTypeChartElement();
+          if (el != null) {
             var data = [
                 {
                     value: typeData[cardType_creature],
@@ -169,11 +178,13 @@
                     label: "Artifact"
                 }
             ];
-            var myPieChart = new Chart(getTypeChartElement()).Pie(data, {
-            });
+            var myPieChart = new Chart(el).Pie(data, {});
+          }
         }
 
         function setUpManaCurveBarChart(manaData) {
+          var el = getBarChartElement();
+          if (el != null) {
             var data = {
                 labels: ["0", "1", "2", "3", "4", "5", "6", "7+"],
                 datasets: [
@@ -187,11 +198,13 @@
                     }
                 ]
             };
-            var myBarChart = new Chart(getBarChartElement()).Bar(data, {
-            });
+            var myBarChart = new Chart(el).Bar(data, {});
+          }
         }
 
         function setUpColorPieChart(colorData) {
+          var el = getPieChartElement();
+          if (el != null) {
             var data = [
                 {
                     value: colorData[0],
@@ -224,8 +237,8 @@
                     label: "Green"
                 }
             ];
-            var myPieChart = new Chart(getPieChartElement()).Pie(data, {
-            });
+            var myPieChart = new Chart(el).Pie(data, {});
+          }
         }
 
 

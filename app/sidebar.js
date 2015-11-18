@@ -6,12 +6,8 @@
 
             $scope.isCurrent = isCurrent;
             $scope.navRoutes = routes;
-
-            $scope.close = function () {
-              $mdSidenav('right').close();
-            };
             $scope.toggleMenu = function() {
-              $mdSidenav('right').toggle();
+              $mdSidenav('nav').toggle();
             };
 
 

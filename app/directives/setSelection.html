@@ -1,33 +1,36 @@
-﻿<div class="row">
-    <div class="col-xs-12 col-md-{{12 / setGroups[0].length}} textcenter" ng-repeat="set in setGroups[0]">
-        <div>
-            {{set.fullName}}
-        </div>
-        <input type="number" ng-model="set.boostersToOpen" />
-    </div>
-</div>
+<md-card class="card">
+  <div ng-repeat="set in setGroups[0]">
+      <div>
+          {{set.fullName}}
+      </div>
+      <input type="number" ng-model="set.boostersToOpen" />
+  </div>
 
-<div ng-if="additionalDropdownModel != null" class="row textcenter" style="padding-top:1rem;">
-    <select ng-model="additionalDropdownModel">
-        <option ng-repeat="opt in additionalDropdownOptions" value="{{opt.value}}">
-            {{opt.text}}
-        </option>
-    </select>
-</div>
+  <div ng-transclude></div>
 
-<div class="optionsButton " ng-click="displayExtraOptions()">
-    More Options
-    <i ng-hide="showExtraOptions" class="icon-chevron-down"></i>
-    <i ng-show="showExtraOptions" class="icon-chevron-up"></i>
-</div>
+  <button class="iconBtn bottomFloatingBtn" ng-click="displayExtraOptions()">
+    <i class="fa fa-cogs fa-3x black"></i>
+  </button>
 
-<div ng-show="showExtraOptions" class="moreOptionsSection">
-    <div class="row" ng-repeat="setGroup in setGroups" ng-if="$index != 0">
-        <div class="col-xs-12 col-md-{{12 / setGroup.length}} textcenter" ng-repeat="set in setGroup">
-            <div>
-                {{set.fullName}}
-            </div>
-            <input type="number" ng-model="set.boostersToOpen" />
-        </div>
-    </div>
-</div>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="options">
+
+    <md-toolbar class="md-theme-light">
+      <h2 class="md-toolbar-tools">Options</h2>
+      <md-button ng-click="displayExtraOptions()" class="md-primary closeSideBar">
+        <i class="fa fa-close"></i>
+      </md-button>
+    </md-toolbar>
+    <md-content layout-padding>
+      <button ng-click="additionButtonFunctionClicked()">{{additionalButtonText}}</button>
+      <div ng-repeat="setGroup in setGroups">
+          <div ng-repeat="set in setGroup">
+              <label for="setSelectionInput{{set.shortName}}">
+                  {{set.fullName}}
+              </label>
+              <br />
+              <input id="setSelectionInput{{set.shortName}}" type="number" ng-model="set.boostersToOpen" />
+          </div>
+      </div>
+    </md-content>
+
+</md-sidenav>

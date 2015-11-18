@@ -1,27 +1,32 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('mtgApp').directive('setSelection', function () {
+    angular.module('mtgApp').directive('setSelection', ['$mdSidenav', function ($mdSidenav) {
 
         return {
             scope: {
                 setGroups: '=',
-                additionalDropdownModel: '=',
-                additionalDropdownOptions: '='
+                additionalDropdownOptions: '=',
+                additionalButtonText: '@',
+                additionalButtonFunction: '&'
             },
             restrict: 'AE',
             templateUrl: '/app/directives/setSelection.html',
+            transclude: true,
             controller: function ($scope, $element) {
 
-                $scope.showExtraOptions = false;
-
                 $scope.displayExtraOptions = function () {
-                    $scope.showExtraOptions = true;
+                    $mdSidenav('options').toggle();
+                }
+
+                $scope.additionButtonFunctionClicked = function() {
+                  $scope.displayExtraOptions();
+                  $scope.additionalButtonFunction();
                 }
             }
         }
 
-    });
+    }]);
 
 
 })();

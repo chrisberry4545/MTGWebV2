@@ -3,13 +3,11 @@
 
   var controllerId = 'draftsim';
 
-  angular.module('mtgApp').controller(controllerId, ['$scope', 'datacontext', 'downloadDataService', 'landcards', 'ai',
-  function($scope, datacontext, downloadDataService, landcards, ai) {
-    // var getLogFn = common.logger.getLogFn;
-    // var log = getLogFn(controllerId);
-    // var logSuccess = common.logger.getLogFn(controllerId, 'success');
-    // var logError = common.logger.getLogFn(controllerId, 'error');
-
+  angular.module('mtgApp').controller(controllerId, ['$scope', 'datacontext', 'downloadDataService', 'landcards', 'ai', 'logger',
+  function($scope, datacontext, downloadDataService, landcards, ai, logger) {
+    var log = logger.logStandard;
+    var logSuccess = logger.logSuccess;
+    var logError = log.logError;
     var vm = this;
 
     vm.controllerId = controllerId;
@@ -53,8 +51,8 @@
 
 
     vm.chartsHidden = false;
-    vm.showCharts = function () {
-        vm.chartsHidden = false;
+    vm.toggleCharts = function () {
+        vm.chartsHidden = !vm.chartsHidden;
     }
 
 

@@ -3,12 +3,15 @@ $lgWidth: 1000px;
 
 $lightBackgroundColor: rgb(235,235,252);
 $cardBackgroundColor: rgb(255,255,255);
+$darkColor: #333333;
+
+$lightColor: #ddeeff;
 
 
 body, html {
   margin:0;
   font-family: 'Roboto', sans-serif;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 body {
   background-color: $lightBackgroundColor;
@@ -20,6 +23,21 @@ h2 {
 button {
   font-weight: 300;
   font-family: 'Roboto', sans-serif;
+}
+.iconBtn {
+  border:none;
+  background:none;
+}
+.bottomFloatingBtn {
+  position:fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+.white {
+  color:white;
+}
+.black {
+  color:black;
 }
 .widthAuto {
   width: auto;
@@ -34,13 +52,24 @@ button {
   position:absolute;
   top:50%;
   left:50%;
+  -webkit-transform: translate(-50%, -50%); /* Ch <36, Saf 5.1+, iOS, An =<4.4.4 */
+  -ms-transform: translate(-50%, -50%); /* IE 9 */
   transform:translate(-50%, -50%);
 }
 
+md-toolbar {
+  background:$darkColor !important;
+}
 
+$topBannerHeight: 50px;
 .topBanner {
   width:100vw;
-  background:grey;
+  height:$topBannerHeight;
+  min-height: $topBannerHeight;
+
+  .md-toolbar-tools {
+    height:$topBannerHeight;
+  }
 
   h2 {
     display:inline-block;
@@ -60,6 +89,31 @@ button {
       }
     }
   }
+}
+
+.menuList {
+  padding: 0;
+  margin:0;
+
+  .menuItem {
+    padding: 2.5rem 0rem 2.5rem 2rem;
+    cursor: pointer;
+    color:black;
+    display:block;
+
+    &:hover {
+      background:$lightColor;
+    }
+    .current {
+      background:$lightColor;
+    }
+  }
+}
+
+.closeSideBar {
+  position:absolute;;
+  top: 9px;
+  right:0;
 }
 
 .card {
@@ -86,4 +140,58 @@ button {
 .mainBtns {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.fullWidth {
+  width:100% !important;
+}
+
+$cardColumnWidth: 75%;
+.cardColumn {
+
+  @media(min-width:$mdWidth) {
+    width:$cardColumnWidth;
+    float:left;
+    overflow-y:scroll;
+    max-height: 100vh;
+  }
+}
+.graphColumn {
+  @media(min-width:$mdWidth) {
+    width:(100 - $cardColumnWidth);
+    float:left;
+    overflow-y:scroll;
+    max-height: 100vh;
+  }
+}
+
+.cardPanelCard {
+  margin:1rem;
+  padding:0;
+}
+.cardPanelTitle {
+  text-align: center;
+}
+.card-list {
+  list-style:none;
+  text-align:center;
+  padding:0;
+
+  li {
+    display:inline-block;
+    cursor: pointer;
+    position:relative;
+    width: 230px;
+
+    .foil {
+      color: white;
+      background: rgba(0,0,0,0.7);
+      padding: 0.5rem;
+      border-radius: 50%;
+      font-size: 1.7rem;
+      position:absolute;
+      top: 13%;
+      left: 8%;
+    }
+  }
 }

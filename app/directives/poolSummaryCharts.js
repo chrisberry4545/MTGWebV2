@@ -24,27 +24,26 @@
                     trackEvent($scope.controllerId, 'toggle-charts');
                 };
 
+                function setUpGraphs(cardsToUse, pieChartContainer, manaCurveBarChartContainer, typePieChartContainer) {
+                  graphAnalysis.resetAllCanvas();
+                  graphAnalysis.setPieChartGraphElement(pieChartContainer, graphWidth, graphHeight);
+                  graphAnalysis.setBarChartGraphElement(manaCurveBarChartContainer, graphWidth, graphHeight);
+                  graphAnalysis.setTypeChartHolder(typePieChartContainer, graphWidth, graphHeight);
+                  graphAnalysis.displayChartsForCards(cardsToUse);
+                }
                 $scope.$watch(function () {
                     return $scope.topGraphCards;
                 }, function (newVal, oldVal) {
-                    graphAnalysis.resetAllCanvas();
-                    graphAnalysis.setPieChartGraphElement('colorPieChartContainer', graphWidth, graphHeight);
-                    graphAnalysis.setBarChartGraphElement('manaCurveBarChartContainer', graphWidth, graphHeight);
-                    graphAnalysis.setTypeChartHolder('typePieChartContainer', graphWidth, graphHeight);
-                    graphAnalysis.displayChartsForCards($scope.topGraphCards);
+                  setUpGraphs($scope.topGraphCards, 'colorPieChartContainer', 'manaCurveBarChartContainer', 'typePieChartContainer');
                 }, true);
 
-                if ($scope.bottomGraphCards != null) {
 
-                    $scope.$watch(function () {
-                        return $scope.bottomGraphCards;
-                    }, function (newVal, oldVal) {
-                        graphAnalysis.resetAllCanvas();
-                        graphAnalysis.setPieChartGraphElement('colorPieChartContainer-bottom', graphWidth, graphHeight);
-                        graphAnalysis.setBarChartGraphElement('manaCurveBarChartContainer-bottom', graphWidth, graphHeight);
-                        graphAnalysis.setTypeChartHolder('typePieChartContainer-bottom', graphWidth, graphHeight);
-                        graphAnalysis.displayChartsForCards($scope.bottomGraphCards);
-                    }, true);
+                if ($scope.bottomGraphCards != null) {
+                  $scope.$watch(function () {
+                      return $scope.bottomGraphCards;
+                  }, function (newVal, oldVal) {
+                    setUpGraphs($scope.bottomGraphCards, 'colorPieChartContainer-bottom', 'manaCurveBarChartContainer-bottom', 'typePieChartContainer-bottom');
+                  }, true);
 
                 }
 

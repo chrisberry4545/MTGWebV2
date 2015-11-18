@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css" />
   <link rel="stylesheet" href="./bower_components/angular-material/angular-material.layouts.min.css" />
   <link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body ng-app="mtgApp" ng-cloak >
@@ -12,28 +15,27 @@
   <div ng-controller="sidebar">
     <md-toolbar md-scroll-shrink ng-if="true" class="topBanner">
       <div class="md-toolbar-tools">
+        <button class="iconBtn" ng-click="toggleMenu()">
+          <i class="fa fa-bars white"></i>
+        </button>
         <h3>
           MTG Mirror
         </h3>
-        <button ng-click="toggleMenu()">TEST</button>
       </div>
     </md-toolbar>
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="nav">
 
         <md-toolbar class="md-theme-light">
-          <h2 class="md-toolbar-tools">Sidenav Right</h2>
-          <md-button ng-click="close()" class="md-primary">
-            Close Sidenav Right
+          <h2 class="md-toolbar-tools">Menu</h2>
+          <md-button ng-click="toggleMenu()" class="md-primary closeSideBar">
+            <i class="fa fa-close"></i>
           </md-button>
         </md-toolbar>
-        <md-content layout-padding>
-          <ul>
-              <li data-ng-class="isCurrent(r)"
-                  data-ng-repeat="r in navRoutes">
-                  <a href="#{{r.url}}">{{r.config.settings.content}}</a>
-              </li>
-          </ul>
+        <md-content class="menuList">
+          <a data-ng-repeat="r in navRoutes" href="#{{r.url}}" data-ng-class="isCurrent(r)" class="menuItem" >
+            {{r.config.settings.content}}
+          </a>
         </md-content>
 
     </md-sidenav>
@@ -79,6 +81,10 @@
   <script src="./app/sidebar.js"></script>
   <script src="./app/startScreen/startScreen.js"></script>
   <script src="./app/draftsim/draftsim.js"></script>
+  <script src="./app/sealedsim/sealedsim.js"></script>
+  <script src="./app/browsecards/browsecards.js"></script>
+  <script src="./app/boostersim/boostersim.js"></script>
+  <script src="./app/about/about.js"></script>
 
   <!--Services-->
   <script src="./app/services/datacontext.js"></script>
@@ -88,6 +94,7 @@
   <script src="./app/services/landcards.js"></script>
   <script src="./app/services/localStorageService.js"></script>
   <script src="./app/services/ai.js"></script>
+  <script src="./app/services/logger.js"></script>
 
   <!--Directives-->
   <script src="./app/directives/cardDisplay.js"></script>

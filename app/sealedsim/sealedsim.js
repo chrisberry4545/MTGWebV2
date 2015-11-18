@@ -40,7 +40,7 @@
         }
 
         vm.chartsHidden = false;
-        vm.hideCharts = function () {
+        vm.toggleCharts = function () {
             vm.chartsHidden = !vm.chartsHidden;
         }
 
