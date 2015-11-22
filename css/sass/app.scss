@@ -54,9 +54,6 @@ button {
   position:fixed;
   bottom: 1rem;
   right: 1rem;
-  background: grey;
-  border-radius: 50%;
-  padding: 1rem;
 }
 
 .divider {
@@ -249,6 +246,8 @@ $graphColumnWidth: 350px;
     width: $graphColumnWidth;
     float:right;
   }
+
+
 }
 
 .textColumn {
@@ -263,7 +262,7 @@ $graphColumnWidth: 350px;
   @media(min-width: $mdWidth) {
     max-height: calc(100vh - #{$advertSectionHeight + $topBannerHeight});
   }
-  
+
   &.advertClosed {
     max-height: calc(100vh - #{$topBannerHeight});
   }
@@ -317,4 +316,12 @@ $graphColumnWidth: 350px;
 .testHandDialog {
   max-height: 98%;
   max-width: 98%;
+}
+
+.pieChart {
+  canvas {
+    border-radius: 50%;
+    background: rgba(0,0,0,0.8);
+    padding: 0.2rem;
+  }
 }

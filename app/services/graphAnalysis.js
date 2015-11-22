@@ -16,15 +16,15 @@
             resetAllCanvas: resetAllCanvas
         };
 
-        var whiteColor = '#FFFFCC';
-        var blueColor = 'rgba(29,151,152,0.5)';
-        var blackColor = 'rgba(6,6,6,0.7)';
-        var redColor = 'rgba(216,90,91,0.8)';
-        var greenColor = 'rgba(74,106,41,0.8)';
+        var whiteColor = '#E0D0E0;';//'#FFFFCC';
+        var blueColor ='#058dc7';// 'rgba(29,151,152,0.5)';
+        var blackColor = '#11140c';//'rgba(6,6,6,0.7)';
+        var redColor = '#CC0000';//'rgba(216,90,91,0.8)';
+        var greenColor = '#50b432';// 'rgba(74,106,41,0.8)';
         var whiteColor_highlight = '#FFFFCC';
         var blueColor_highlight = '#33CCFF';
         var blackColor_highlight = 'rgba(0,0,0,0.7)';
-        var redColor_highlight = '#CC0000';
+        var redColor_highlight = '#db4437';
         var greenColor_highlight = '#99FF99';
 
         var cardType_creature_color = greenColor;
@@ -42,7 +42,7 @@
         var cardType_artifact_color = blackColor;
         var cardType_artifact_color_highlight = blackColor_highlight;
 
-        var barChartColor = '#dedede';
+        var barChartColor = 'rgb(51,51,51)';
         var highlightColor = 'rgb(51,51,51)';
         var costBarChart_fillColor = barChartColor;
         var costBarChart_strokeColor = barChartColor;
