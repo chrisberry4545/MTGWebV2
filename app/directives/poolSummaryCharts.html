@@ -1,9 +1,11 @@
 ﻿
-<md-card id="chartsDiv" ng-show="!chartsHidden" class="card">
+<md-card id="chartsDiv" ng-show="!chartsHidden" class="card cardMargins">
 
-    <button class="btn chris-btn chris-btn-mini" ng-click="hideCharts()">
-        Hide Charts <i class="icon-chevron-up"></i>
-    </button>
+    <div class="center">
+      <md-button class="md-raised md-primary medBtn" ng-click="hideCharts()">
+          Hide Charts <i class="icon-chevron-up"></i>
+      </md-button>
+    </div>
 
     <div>
         <h3>{{topCardStatsTitle}} <span>({{topGraphCards.length}})</span></h3>

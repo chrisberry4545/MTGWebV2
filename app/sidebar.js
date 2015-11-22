@@ -6,9 +6,14 @@
 
             $scope.isCurrent = isCurrent;
             $scope.navRoutes = routes;
+            $scope.topNavRoutes = $scope.navRoutes.slice(1, $scope.navRoutes.length);
             $scope.toggleMenu = function() {
               $mdSidenav('nav').toggle();
             };
+
+            $scope.$on('$routeChangeSuccess', function(next, current) {
+              $mdSidenav('nav').close();
+            });
 
 
             function isCurrent(route) {

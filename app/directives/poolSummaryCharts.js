@@ -25,10 +25,10 @@
                 };
 
                 function setUpGraphs(cardsToUse, pieChartContainer, manaCurveBarChartContainer, typePieChartContainer) {
-                  graphAnalysis.resetAllCanvas();
                   graphAnalysis.setPieChartGraphElement(pieChartContainer, graphWidth, graphHeight);
                   graphAnalysis.setBarChartGraphElement(manaCurveBarChartContainer, graphWidth, graphHeight);
                   graphAnalysis.setTypeChartHolder(typePieChartContainer, graphWidth, graphHeight);
+                  graphAnalysis.resetAllCanvas();
                   graphAnalysis.displayChartsForCards(cardsToUse);
                 }
                 $scope.$watch(function () {

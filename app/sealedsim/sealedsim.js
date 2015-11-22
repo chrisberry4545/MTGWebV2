@@ -1,16 +1,12 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'sealedsim';
-    angular.module('mtgApp').controller(controllerId, ['logger', 'datacontext', 'downloadDataService', 'graphAnalysis', 'landcards', '$scope', sealedsim]);
+    angular.module('mtgApp').controller(controllerId, ['logger', 'datacontext', 'downloadDataService', 'graphAnalysis', 'landcards', '$scope', '$mdDialog', sealedsim]);
 
-    function sealedsim(logger, datacontext, downloadDataService, graphAnalysis, landcards, $scope) {
+    function sealedsim(logger, datacontext, downloadDataService, graphAnalysis, landcards, $scope, $mdDialog) {
         var log = logger.logStandard;
         var logSuccess = logger.logSuccess;
         var logError = log.logError;
-
-
-        var graphWidth = 200;
-        var graphHeight = 200;
 
         var vm = this;
         vm.title = 'Sealed Simulator';
@@ -18,18 +14,6 @@
 
         vm.landcards = [];
         vm.selectedLandCards = [];
-
-
-        vm.showExtraOptions = false;
-        vm.displayExtraOptions = function () {
-            if (vm.showExtraOptions) {
-                vm.showExtraOptions = false;
-                trackEvent(controllerId, 'hide-extra-options');
-            } else {
-                vm.showExtraOptions = true;
-                trackEvent(controllerId, 'show-extra-options');
-            }
-        }
 
         vm.setGroups = [];
         function initSetGroups() {
@@ -60,14 +44,6 @@
 
         vm.selectedCards = [];
 
-        vm.saveSelection = function () {
-            downloadDataService.saveCardsList(vm.selectedCards.concat(vm.selectedLandCards), "sealedselection");
-            trackEvent(controllerId, 'save-selected-cards');
-        }
-        vm.saveCardsInBooster = function () {
-            downloadDataService.saveCardsList(vm.boosterCards, "cardsRemainingInPool");
-            trackEvent(controllerId, 'save-booster-cards');
-        }
         vm.saveCompletePool = function () {
             downloadDataService.saveCardsList(vm.selectedCards.concat(vm.boosterCards), "sealedPool");
             trackEvent(controllerId, 'save-complete-pool');
@@ -87,27 +63,35 @@
 
         vm.addToDeck = function(card)
         {
-            logSuccess("Added " + card.Name + " to your selection...");
+            log("Added " + card.Name + " to your selection...");
             _removeFromArrayAndAddToArray(vm.boosterCards, vm.selectedCards, card);
             trackEvent(controllerId, 'add-to-deck', card.Name);
         };
 
         vm.removeFromDeck = function(card)
         {
-            log("Put " + card.Name + " back into sealed pool...")
+            log("Put " + card.Name + " back into sealed pool...");
             _removeFromArrayAndAddToArray(vm.selectedCards, vm.boosterCards, card);
             trackEvent(controllerId, 'remove-from-deck', card.Name);
         }
 
-        vm.clearSelection = function () {
-            var confirmed = confirm("Are you sure you want to clear your selection?");
-            if (confirmed) {
-                for (var i = 0; i < vm.selectedCards.length; i++) {
-                    vm.boosterCards.push(vm.selectedCards[i]);
-                }
-                vm.selectedCards = [];
-                vm.selectedLandCards = [];
-            }
+        vm.clearSelection = function (ev) {
+          if (vm.selectedCards.length + vm.selectedLandCards.length > 0) {
+            var confirm = $mdDialog.confirm()
+                      .title('Are you sure you want to clear your selection?')
+                      .ariaLabel('Lucky day')
+                      .targetEvent(ev)
+                      .ok('Ok')
+                      .cancel('Cancel');
+            $mdDialog.show(confirm).then(function() {
+              for (var i = 0; i < vm.selectedCards.length; i++) {
+                  vm.boosterCards.push(vm.selectedCards[i]);
+              }
+              vm.selectedCards = [];
+              vm.selectedLandCards = [];
+            }, function() { //No need to do anything on cancel
+            });
+          }
         }
 
         function _removeFromArrayAndAddToArray(arrayToRemoveFrom, arrayToAddTo, card)
@@ -121,6 +105,7 @@
 
         vm.openBoosters = function()
         {
+            log("Opening boosters...");
             vm.boosterCards = [];
             vm.selectedCards = [];
             vm.selectedLandCards = [];

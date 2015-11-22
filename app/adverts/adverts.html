@@ -1,0 +1,30 @@
+﻿
+<md-card class="card mdUp" id="advertSection">
+  <div class="center">
+      <div data-my-ad-sense>
+          <!-- Google AdSense -->
+          <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <ins class="adsbygoogle"
+               style="display:inline-block;width:728px;height:90px"
+               data-ad-client="ca-pub-7370748849235747"
+               data-ad-slot="6178792106"></ins>
+          <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+      </div>
+  </div>
+  <md-button onclick="closeAds()" class="closeAdBtn">
+      <i ng-if="!vm.showExtraOptions" class="fa fa-chevron-up"></i>
+  </md-button>
+</div>
+
+<script>
+  function closeAds() {
+    document.getElementById('advertSection').style.display = 'none';
+    var fullLengthCols = document.getElementsByClassName('fullLengthCol');
+    for(var i = 0; i < fullLengthCols.length; i++) {
+      fullLengthCols[i].className += " advertClosed";
+    }
+    trackEvent('bannerad', 'hide-ad');
+  }
+</script>

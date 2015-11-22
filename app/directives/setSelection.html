@@ -1,36 +1,12 @@
-<md-card class="card">
-  <div ng-repeat="set in setGroups[0]">
-      <div>
+<md-card class="card cardMargins">
+  <div ng-repeat="set in setGroups[0]" class="center">
+      <label for="setSelectionInput{{set.shortName}}">
           {{set.fullName}}
-      </div>
-      <input type="number" ng-model="set.boostersToOpen" />
+      </label>
+      <br/>
+      <input id="setSelectionInput{{set.shortName}}" type="number" ng-model="set.boostersToOpen" />
   </div>
 
   <div ng-transclude></div>
 
-  <button class="iconBtn bottomFloatingBtn" ng-click="displayExtraOptions()">
-    <i class="fa fa-cogs fa-3x black"></i>
-  </button>
-
-<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="options">
-
-    <md-toolbar class="md-theme-light">
-      <h2 class="md-toolbar-tools">Options</h2>
-      <md-button ng-click="displayExtraOptions()" class="md-primary closeSideBar">
-        <i class="fa fa-close"></i>
-      </md-button>
-    </md-toolbar>
-    <md-content layout-padding>
-      <button ng-click="additionButtonFunctionClicked()">{{additionalButtonText}}</button>
-      <div ng-repeat="setGroup in setGroups">
-          <div ng-repeat="set in setGroup">
-              <label for="setSelectionInput{{set.shortName}}">
-                  {{set.fullName}}
-              </label>
-              <br />
-              <input id="setSelectionInput{{set.shortName}}" type="number" ng-model="set.boostersToOpen" />
-          </div>
-      </div>
-    </md-content>
-
-</md-sidenav>
+</md-card>

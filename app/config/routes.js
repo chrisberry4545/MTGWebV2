@@ -65,6 +65,15 @@
                     }
                 }
             }, {
+                url: '/news',
+                config: {
+                    title: 'news',
+                    templateUrl: 'app/news/news.html',
+                    settings: {
+                        content: 'News'
+                    }
+                }
+            }, {
                 url: '/about',
                 config: {
                     title: 'about',

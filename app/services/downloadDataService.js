@@ -13,17 +13,17 @@
 
         function saveCardsList(listOfCardsToSave, fileName) {
             var convertedCardList = [];
-            $.each(listOfCardsToSave, function (index, value) {
-                var cardName = value.Name;
-                var indexOfCardInMapArray = indexOfCardInMap(convertedCardList, cardName);
-                if (indexOfCardInMapArray == -1) {
-                    var map = {};
-                    map.Name = cardName;
-                    map.Number = 1;
-                    convertedCardList.push(map);
-                } else {
-                    convertedCardList[indexOfCardInMapArray].Number = convertedCardList[indexOfCardInMapArray].Number + 1;
-                }
+            listOfCardsToSave.map(function(value, index) {
+              var cardName = value.Name;
+              var indexOfCardInMapArray = indexOfCardInMap(convertedCardList, cardName);
+              if (indexOfCardInMapArray == -1) {
+                  var map = {};
+                  map.Name = cardName;
+                  map.Number = 1;
+                  convertedCardList.push(map);
+              } else {
+                  convertedCardList[indexOfCardInMapArray].Number = convertedCardList[indexOfCardInMapArray].Number + 1;
+              }
             });
             var convertedCardsText = convertMapToCardText(convertedCardList);
             saveData(convertedCardsText, fileName);
@@ -31,7 +31,7 @@
 
         function convertMapToCardText(convertedCardList) {
             var text = "";
-            $.each(convertedCardList, function (index, value) {
+            convertedCardList.map(function(value, index) {
                 text += value.Number + " " + value.Name + "\r\n";
             });
             return text;

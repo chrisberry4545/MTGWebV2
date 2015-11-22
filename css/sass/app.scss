@@ -1,4 +1,4 @@
-$mdWidth: 750px;
+$mdWidth: 860px;
 $lgWidth: 1000px;
 
 $lightBackgroundColor: rgb(235,235,252);
@@ -7,14 +7,36 @@ $darkColor: #333333;
 
 $lightColor: #ddeeff;
 
+$fontColor: rgba(0,0,0,0.87);
+
+.mdUp {
+  display:none;
+  @media(min-width:$mdWidth) {
+    display:inline-block;
+  }
+}
+.lgUp {
+  display:none;
+  @media(min-width: $lgWidth) {
+    display: inline-block;
+  }
+}
 
 body, html {
   margin:0;
   font-family: 'Roboto', sans-serif;
   overflow:hidden;
+  max-height: calc(100vh - 50px);
 }
 body {
   background-color: $lightBackgroundColor;
+}
+i {
+  color: $fontColor;
+}
+input, select {
+  text-align: center;
+  width: 180px;
 }
 
 h2 {
@@ -32,6 +54,16 @@ button {
   position:fixed;
   bottom: 1rem;
   right: 1rem;
+  background: grey;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
+.divider {
+  $dividerPadding: 1rem;
+  padding-top:$dividerPadding;
+  margin-bottom: $dividerPadding;
+  border-bottom: 1px solid $fontColor;
 }
 .white {
   color:white;
@@ -57,37 +89,92 @@ button {
   transform:translate(-50%, -50%);
 }
 
+
 md-toolbar {
   background:$darkColor !important;
 }
 
+
 $topBannerHeight: 50px;
+$advertSectionHeight: 100px;
+#advertSection {
+  height: $advertSectionHeight;
+  margin: 0 auto;
+  padding-top: 5px;
+  position: relative;
+
+  @media(min-width: $mdWidth) {
+    display: block;
+  }
+
+  .closeAdBtn {
+    width: 60px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+}
 .topBanner {
   width:100vw;
   height:$topBannerHeight;
   min-height: $topBannerHeight;
+  overflow:hidden;
 
   .md-toolbar-tools {
     height:$topBannerHeight;
   }
 
-  h2 {
-    display:inline-block;
+  $topNavSpacing: 1rem;
+  h3 {
+    padding:0 $topNavSpacing;
+    white-space: nowrap;
   }
-  ul {
-    display:inline-block;
-    list-style:none;
 
-    li {
-      display:inline-block;
-      &:after {
-        content: '|';
-      }
+  .topNavSpan {
+    white-space: nowrap;
+    display:none;
 
-      &:last-child:after {
-        content: ''
+    &:nth-child(3), &:nth-child(4) {
+      @media(min-width: 550px) {
+          display: inline-block;
       }
     }
+    &:nth-child(5), &:nth-child(6) {
+      @media(min-width: 850px) {
+        display:inline-block;
+      }
+    }
+    @media(min-width: 1050px) {
+      display:inline-block;
+    }
+
+    &:after {
+      content: '|';
+      padding: 0 $topNavSpacing / 2;
+    }
+
+    &:last-child {
+      &:after {
+        content: '';
+      }
+    }
+
+  }
+
+  .topNavRoute {
+    margin:0 $topNavSpacing/2 0 $topNavSpacing/2;
+    padding: 0.25rem;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: 100;
+
+    &.current, &:hover {
+      background:$lightColor;
+      color: $fontColor;
+    }
+
   }
 }
 
@@ -101,10 +188,7 @@ $topBannerHeight: 50px;
     color:black;
     display:block;
 
-    &:hover {
-      background:$lightColor;
-    }
-    .current {
+    &:hover, &.current {
       background:$lightColor;
     }
   }
@@ -125,6 +209,10 @@ $topBannerHeight: 50px;
   max-width: 1000px;
 }
 
+.medBtn {
+  height:2.5rem;
+  width:10rem;
+}
 .bigBtn {
   height:5rem;
   width: 14rem;
@@ -146,28 +234,47 @@ $topBannerHeight: 50px;
   width:100% !important;
 }
 
-$cardColumnWidth: 75%;
+$graphColumnWidth: 350px;
 .cardColumn {
 
   @media(min-width:$mdWidth) {
-    width:$cardColumnWidth;
-    float:left;
-    overflow-y:scroll;
-    max-height: 100vh;
+    margin-right:$graphColumnWidth;
   }
 }
 .graphColumn {
+  display:none;
+
   @media(min-width:$mdWidth) {
-    width:(100 - $cardColumnWidth);
-    float:left;
-    overflow-y:scroll;
-    max-height: 100vh;
+    display:block;
+    width: $graphColumnWidth;
+    float:right;
+  }
+}
+
+.textColumn {
+  max-width:800px;
+  margin:auto;
+}
+
+.fullLengthCol {
+  max-height: calc(100vh - #{$topBannerHeight});
+  overflow-y:scroll;
+
+  @media(min-width: $mdWidth) {
+    max-height: calc(100vh - #{$advertSectionHeight + $topBannerHeight});
+  }
+  
+  &.advertClosed {
+    max-height: calc(100vh - #{$topBannerHeight});
   }
 }
 
 .cardPanelCard {
-  margin:1rem;
   padding:0;
+  position: relative;
+}
+.cardMargins {
+  margin:1rem;
 }
 .cardPanelTitle {
   text-align: center;
@@ -194,4 +301,20 @@ $cardColumnWidth: 75%;
       left: 8%;
     }
   }
+}
+
+.clearBtn {
+  position: absolute;
+  top:0;
+  right:0;
+}
+.saveBtn {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.testHandDialog {
+  max-height: 98%;
+  max-width: 98%;
 }

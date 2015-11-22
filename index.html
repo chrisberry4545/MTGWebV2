@@ -21,6 +21,11 @@
         <h3>
           MTG Mirror
         </h3>
+        <span class="topNavSpan" data-ng-repeat="r in topNavRoutes">
+          <a class="topNavRoute" href="#{{r.url}}" data-ng-class="isCurrent(r)" class="menuItem" >
+            {{r.config.settings.content}}
+          </a>
+        </span>
       </div>
     </md-toolbar>
 
@@ -75,6 +80,7 @@
   <script src="./bower_components/angular-aria/angular-aria.min.js"></script>
   <script type="text/javascript" src="./bower_components/angular-material/angular-material.min.js"></script>
   <script type="text/javascript" src="./bower_components/Chart.js/Chart.min.js"></script>
+  <script type="text/javascript" src="./app/services/FileSaver.min.js"></script>
 
   <script src="./app/app.js"> </script>
   <script src="./app/config/routes.js"></script>
@@ -101,6 +107,7 @@
   <script src="./app/directives/handSimulator.js"></script>
   <script src="./app/directives/poolSummaryCharts.js"></script>
   <script src="./app/directives/setSelection.js"></script>
+  <script src="./app/directives/optionsMenu.js"></script>
 
   <!-- Card Data -->
   <script src="./app/carddata/CardsBFZ.js"></script>

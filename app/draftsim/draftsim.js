@@ -3,8 +3,8 @@
 
   var controllerId = 'draftsim';
 
-  angular.module('mtgApp').controller(controllerId, ['$scope', 'datacontext', 'downloadDataService', 'landcards', 'ai', 'logger',
-  function($scope, datacontext, downloadDataService, landcards, ai, logger) {
+  angular.module('mtgApp').controller(controllerId, ['$scope', 'datacontext', 'landcards', 'ai', 'logger', 'downloadDataService',
+  function($scope, datacontext, landcards, ai, logger, downloadDataService) {
     var log = logger.logStandard;
     var logSuccess = logger.logSuccess;
     var logError = log.logError;
@@ -67,15 +67,6 @@
         }
     }
 
-    vm.downloadFullPool = function () {
-        downloadDataService.saveCardsList(vm.selectedCards.concat(vm.deckCards), "MyDraftPool");
-        trackEvent(controllerId, 'download-full-pool');
-    }
-    vm.downloadDraftDeck = function () {
-        downloadDataService.saveCardsList(vm.deckCards.concat(vm.selectedLandCards), "MyDeckSelection");
-        trackEvent(controllerId, 'download-selected-pool');
-    }
-
     vm.addToDeck = function(card)
     {
         _removeFromArrayAndAddToArray(vm.boosterCards, vm.selectedCards, card);
@@ -96,6 +87,13 @@
         }
 
     };
+
+    vm.saveDeckList = function() {
+      downloadDataService.saveCardsList(vm.deckCards.concat(vm.selectedLandCards), vm.topPanelCardsTitle);
+    }
+    vm.saveCompletePool = function() {
+      downloadDataService.saveCardsList(vm.selectedCards.concat(vm.deckCards).concat(vm.selectedLandCards).concat(vm.landcards), "Full draft pool");
+    }
 
     vm.updateSelectedGraphCards = function () {
         vm.cardsToGraph = vm.deckCards.concat(vm.selectedLandCards);

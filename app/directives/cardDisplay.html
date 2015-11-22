@@ -1,8 +1,23 @@
-<md-card class="card cardPanelCard">
-    <h3 class="cardPanelTitle">{{title}}</div>
+<md-card class="card cardPanelCard cardMargins">
+    <h3 class="cardPanelTitle">{{title}}</h3>
+    <md-button ng-if="showClear()" class="clearBtn" ng-click="clearFunction()">
+      Clear
+    </md-button>
+    <md-button ng-if="showSave == 'true'" class="saveBtn" ng-click="saveSelection()">
+      <i class="fa fa-download fa-2x"></i>
+    </md-button>
+
+
     <p ng-if="instructions != null">
         {{instructions}}
     </p>
+
+    <div ng-if="allowTestHands == 'true'">
+      <hand-simulator selected-cards="cards"
+                      selected-land-cards="landCards"
+                      is-enabled="true" />
+    </div>
+
     <ul class="card-list">
         <li data-ng-repeat="card in cards track by $index">
             <img ng-click="cardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />

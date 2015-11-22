@@ -1,16 +1,16 @@
 ﻿<section class="mainbar" data-ng-controller="boostersim as vm">
-  <div class="row">
-      <div ng-include data-src="'/app/adverts/amazonadverts.html'"></div>
+  <div ng-include data-src="'/app/adverts/adverts.html'"></div>
+
+  <div class="fullLengthCol">
+    <div class="center">
+        <set-selection set-groups="vm.setGroups">
+            <md-button ng-click="vm.openBoosters()" class="md-raised md-primary medBtn">Open Boosters</md-button>
+        </set-selection>
+    </div>
+
+    <div>
+      <card-display cards="vm.cards" title="Opened Cards ({{vm.cards.length}})"/>
+    </div>
   </div>
   
-  <div class="normalPanel">
-      <set-selection set-groups="vm.setGroups" />
-  </div>
-
-  <div class="row textcenter">
-      <button ng-click="vm.openBoosters()" class="chris-btn">Open Boosters</button>
-  </div>
-
-  <card-display cards="vm.cards" title="Opened Cards ({{vm.cards.length}})"/>
-
 </section>
