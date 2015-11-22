@@ -1,13 +1,13 @@
 
-<button class="iconBtn bottomFloatingBtn" ng-click="displayExtraOptions()">
-  <i class="fa fa-cogs fa-2x white"></i>
-</button>
+<md-button class="md-fab md-primary iconBtn bottomFloatingBtn" aria-label="Show additional options">
+  <md-icon class="fa fa-cogs fa-2x white"></md-icon>
+</md-button>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="options" ng-click="closeOptions($event)">
 
     <md-toolbar class="md-theme-light">
       <h2 class="md-toolbar-tools">Options</h2>
-      <md-button ng-click="displayExtraOptions()" class="md-primary closeSideBar">
+      <md-button ng-click="displayExtraOptions()" class="md-primary closeSideBar" aria-label="Close additional options">
         <i class="fa fa-close white"></i>
       </md-button>
     </md-toolbar>

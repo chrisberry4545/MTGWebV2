@@ -1,9 +1,9 @@
 <md-card class="card cardPanelCard cardMargins">
     <h3 class="cardPanelTitle">{{title}}</h3>
-    <md-button ng-if="showClear()" class="clearBtn" ng-click="clearFunction()">
+    <md-button ng-if="showClear()" class="clearBtn" ng-click="clearFunction()" aria-label="Clear selection">
       Clear
     </md-button>
-    <md-button ng-if="showSave == 'true'" class="saveBtn" ng-click="saveSelection()">
+    <md-button ng-if="showSave == 'true'" class="saveBtn" ng-click="saveSelection()" aria-label="Save selection">
       <i class="fa fa-download fa-2x"></i>
     </md-button>
 

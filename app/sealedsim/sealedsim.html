@@ -21,8 +21,8 @@
            </select>
        </div>
 
-       <md-button ng-click="vm.openBoosters()" class="md-raised md-primary medBtn">
-         Open Boosters
+       <md-button ng-click="vm.openBoosters()" class="md-raised md-primary medBtn" aria-label="Open boosters">
+         Open boosters
        </md-button>
     </set-selection>
 
@@ -48,8 +48,8 @@
   </div>
 
   <options-menu set-groups="vm.setGroups">
-    <md-button ng-click="vm.toggleCharts()" class="md-raised md-primary medBtn mdUp">Toggle charts</md-button>
-    <md-button ng-click="vm.saveCompletePool()" class="md-raised md-primary medBtn">Save complete pool</md-button>
+    <md-button aria-label="Toggle charts" ng-click="vm.toggleCharts()" class="md-raised md-primary medBtn mdUp">Toggle charts</md-button>
+    <md-button aria-label="Save complete pool" ng-click="vm.saveCompletePool()" class="md-raised md-primary medBtn">Save complete pool</md-button>
     <hand-simulator selected-cards="vm.selectedCards"
                     selected-land-cards="vm.selectedLandCards"
                     controller-id="{{vm.controllerId}}" />
