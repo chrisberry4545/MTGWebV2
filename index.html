@@ -1,13 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html manifest="manifest.appcache">
 <head>
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,500,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.min.css" />
-  <link rel="stylesheet" href="./bower_components/angular-material/angular-material.layouts.min.css" />
-  <link rel="stylesheet" href="css/app.css" />
-  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="./dist/app.min.css" />
 
+  <link rel="icon" type="image/png" href="/mtgmirrorfavicon.png">
+
+  <title>MTG Mirror - Battle for Zendikar Draft and Sealed Simulator</title>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MTG Draft Simulator and Sealed Simulator">
+  <meta name="keywords" content="MTG, Magic the gathering, BFZ, Battle for Zendikar, draft, booster, simulator, mtgmirror, mirror">
+  <meta name="author" content="Chris Berry">
+
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47296152-1']);
+      _gaq.push(['_setDomainName', 'mtgmirror.com']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      function trackPageView(page, eventName, label) {
+          trackAction('_trackPageview', page, eventName, label);
+      }
+      function trackEvent(page, eventName, label) {
+          trackAction('_trackEvent', page, eventName, label);
+      }
+      function trackAction(actionType, page, eventName, label) {
+          _gaq.push([actionType, page, eventName, label])
+      }
+  </script>
 
 </head>
 <body ng-app="mtgApp" ng-cloak >
@@ -15,17 +45,28 @@
   <div ng-controller="sidebar">
     <md-toolbar md-scroll-shrink ng-if="true" class="topBanner">
       <div class="md-toolbar-tools">
-        <button class="iconBtn" ng-click="toggleMenu()">
-          <i class="fa fa-bars white"></i>
-        </button>
-        <h3>
-          MTG Mirror
-        </h3>
-        <span class="topNavSpan" data-ng-repeat="r in topNavRoutes">
-          <a class="topNavRoute" href="#{{r.url}}" data-ng-class="isCurrent(r)" class="menuItem" >
-            {{r.config.settings.content}}
-          </a>
-        </span>
+        <div class="topNavTitle">
+          <button class="iconBtn inlineBlock" ng-click="toggleMenu()">
+            <i class="fa fa-bars white"></i>
+          </button>
+          <h2 class="inlineBlock">
+            <a href="#/">
+              MTG Mirror
+            </a>
+          </h2>
+        </div>
+        <div class="topNavLinks">
+          <div class="topNavLinksFloat">
+            <md-button ng-href="#{{r.url}}" data-ng-class="isCurrent(r)" class="topNavSpan topNavRoute menuItem" data-ng-repeat="r in topNavRoutes">
+              {{r.config.settings.content}}
+            </md-button>
+          </div>
+        </div>
+      </div>
+      <div class="loadingRoute" ng-show="routeLoading">
+        <div class="centerInParent">
+          <div class="pulse-loader"></div>
+        </div>
       </div>
     </md-toolbar>
 
@@ -48,40 +89,19 @@
 
   <div ng-view></div>
 
+  <script type="text/javascript" src="./dist/js/vendor.min.js"></script>
+  <script type="text/javascript" src="./dist/js/app.min.js"></script>
 
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-47296152-1']);
-        _gaq.push(['_setDomainName', 'mtgmirror.com']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-        function trackPageView(page, eventName, label) {
-            trackAction('_trackPageview', page, eventName, label);
-        }
-        function trackEvent(page, eventName, label) {
-            trackAction('_trackEvent', page, eventName, label);
-        }
-        function trackAction(actionType, page, eventName, label) {
-            _gaq.push([actionType, page, eventName, label])
-        }
-    </script>
-
-  <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="./bower_components/angular/angular.min.js"></script>
+  <!-- <script src="./bower_components/angular/angular.min.js"></script>
   <script src="./bower_components/angular-route/angular-route.min.js"></script>
   <script src="./bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="./bower_components/angular-aria/angular-aria.min.js"></script>
   <script type="text/javascript" src="./bower_components/angular-material/angular-material.min.js"></script>
-  <script type="text/javascript" src="./bower_components/Chart.js/Chart.min.js"></script>
-  <script type="text/javascript" src="./app/services/FileSaver.min.js"></script>
+  <script type="text/javascript" src="./bower_components/Chart.js/Chart.min.js"></script> -->
 
+
+
+  <!-- <script type="text/javascript" src="./app/services/FileSaver.min.js"></script>
   <script src="./app/app.js"> </script>
   <script src="./app/config/routes.js"></script>
   <script src="./app/sidebar.js"></script>
@@ -92,7 +112,6 @@
   <script src="./app/boostersim/boostersim.js"></script>
   <script src="./app/about/about.js"></script>
 
-  <!--Services-->
   <script src="./app/services/datacontext.js"></script>
   <script src="./app/services/deckFunctions.js"></script>
   <script src="./app/services/downloadDataService.js"></script>
@@ -102,14 +121,12 @@
   <script src="./app/services/ai.js"></script>
   <script src="./app/services/logger.js"></script>
 
-  <!--Directives-->
   <script src="./app/directives/cardDisplay.js"></script>
   <script src="./app/directives/handSimulator.js"></script>
   <script src="./app/directives/poolSummaryCharts.js"></script>
   <script src="./app/directives/setSelection.js"></script>
   <script src="./app/directives/optionsMenu.js"></script>
 
-  <!-- Card Data -->
   <script src="./app/carddata/CardsBFZ.js"></script>
   <script src="./app/carddata/CardsBNG.js"></script>
   <script src="./app/carddata/CardsDTK.js"></script>
@@ -120,7 +137,7 @@
   <script src="./app/carddata/CardsM15.js"></script>
   <script src="./app/carddata/CardsMM2.js"></script>
   <script src="./app/carddata/CardsORI.js"></script>
-  <script src="./app/carddata/CardsTHS.js"></script>
+  <script src="./app/carddata/CardsTHS.js"></script> -->
 
 
 

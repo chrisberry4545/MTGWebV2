@@ -105,6 +105,7 @@
 
         vm.openBoosters = function()
         {
+
             log("Opening boosters...");
             vm.boosterCards = [];
             vm.selectedCards = [];

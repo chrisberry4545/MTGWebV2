@@ -33,9 +33,9 @@
     vm.selectedLandCards = [];
     vm.cardsToGraph = [];
 
-    var startingTopPanelCardsTitle = "Booster Cards";
+    var startingTopPanelCardsTitle = "Booster cards";
     vm.topPanelCardsTitle = startingTopPanelCardsTitle;
-    var startingCardsStatsTitle = "Selected Cards Stats";
+    var startingCardsStatsTitle = "Selected cards stats";
     vm.cardStatsTitle = startingCardsStatsTitle;
 
 

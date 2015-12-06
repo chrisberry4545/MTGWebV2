@@ -14,7 +14,7 @@
   <div class="cardColumn center fullLengthCol" ng-class="{'fullWidth': vm.chartsHidden }">
 
       <set-selection set-groups="vm.setGroups">
-        <md-button aria-label="Restart draft" ng-click="vm.startDraft()" class="md-raised md-primary medBtn">
+        <md-button aria-label="Restart draft" ng-click="vm.startDraft()" class="md-raised md-primary medBtn elementSpacing">
             <span ng-hide="vm.draftStarted">Start draft</span>
             <span ng-show="vm.draftStarted">Restart draft</span>
         </md-button>
@@ -39,7 +39,7 @@
       </div>
 
       <div ng-if="vm.draftStarted">
-        <card-display title="Card Pool ({{vm.selectedCards.length}})"
+        <card-display title="Card pool ({{vm.selectedCards.length}})"
                       card-click="vm.cardPoolClick(card)"
                       cards="vm.selectedCards"
                       land-cards="vm.landcards"

@@ -3,22 +3,22 @@
 
     <div class="center">
       <md-button class="md-raised md-primary medBtn" ng-click="hideCharts()">
-          Hide Charts <i class="icon-chevron-up"></i>
+          Hide charts <i class="icon-chevron-up"></i>
       </md-button>
     </div>
 
     <div>
         <h3>{{topCardStatsTitle}} <span>({{topGraphCards.length}})</span></h3>
         <div>
-            <h4>Number of Color Symbols</h4>
+            <h4>Number of color symbols</h4>
             <div id="colorPieChartContainer" class="pieChart"></div>
         </div>
         <div>
-            <h4>Mana Curve</h4>
+            <h4>Mana curve</h4>
             <div id="manaCurveBarChartContainer"></div>
         </div>
         <div>
-            <h4>Number of Card Types</h4>
+            <h4>Number of card types</h4>
             <div id="typePieChartContainer" class="pieChart"></div>
         </div>
     </div>
@@ -26,15 +26,15 @@
     <div ng-if="bottomGraphCards != null">
         <h3>{{bottomCardStatsTitle}} <span>({{bottomGraphCards.length}})</span></h3>
         <div>
-            <h4>Number of Color Symbols</h4>
+            <h4>Number of color symbols</h4>
             <div id="colorPieChartContainer-bottom" class="pieChart"></div>
         </div>
         <div>
-            <h4>Mana Curve</h4>
+            <h4>Mana curve</h4>
             <div id="manaCurveBarChartContainer-bottom"></div>
         </div>
         <div>
-            <h4>Number of Card Types</h4>
+            <h4>Number of card types</h4>
             <div id="typePieChartContainer-bottom" class="pieChart"></div>
         </div>
     </div>

@@ -4,9 +4,9 @@
 
 
   <div class="graphColumn center fullLengthCol">
-    <pool-summary-charts top-card-stats-title="'Card Pool Stats'"
+    <pool-summary-charts top-card-stats-title="'Card pool stats'"
                          top-graph-cards="vm.boosterCards"
-                         bottom-card-stats-title="'Selected Cards Stats'"
+                         bottom-card-stats-title="'Selected cards stats'"
                          bottom-graph-cards="vm.selectedCards"
                          controller-id="vm.controllerId"
                          charts-hidden="vm.chartsHidden" />
@@ -16,12 +16,12 @@
   <div class="cardColumn center fullLengthCol" ng-class="{'fullWidth': vm.chartsHidden}">
 
     <set-selection set-groups="vm.setGroups">
-       <div style="padding-top:1rem;">
+       <div class="elementSpacing">
            <select ng-options="item.value as item.text for item in vm.promo_options" ng-model="vm.include_promo">
            </select>
        </div>
 
-       <md-button ng-click="vm.openBoosters()" class="md-raised md-primary medBtn" aria-label="Open boosters">
+       <md-button ng-click="vm.openBoosters()" class="md-raised md-primary medBtn elementSpacing" aria-label="Open boosters">
          Open boosters
        </md-button>
     </set-selection>

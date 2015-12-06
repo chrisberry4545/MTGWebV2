@@ -1,10 +1,10 @@
 <md-card class="card cardPanelCard cardMargins">
     <h3 class="cardPanelTitle">{{title}}</h3>
-    <md-button ng-if="showClear()" class="clearBtn" ng-click="clearFunction()" aria-label="Clear selection">
+    <md-button ng-disabled="cards.length + landCards.length == 0" ng-if="showClear()" class="clearBtn" ng-click="clearFunction()" aria-label="Clear selection">
       Clear
     </md-button>
     <md-button ng-if="showSave == 'true'" class="saveBtn" ng-click="saveSelection()" aria-label="Save selection">
-      <i class="fa fa-download fa-2x"></i>
+      <md-icon class="fa fa-download fa-2x"></md-icon>
     </md-button>
 
 
@@ -20,11 +20,15 @@
 
     <ul class="card-list">
         <li data-ng-repeat="card in cards track by $index">
-            <img ng-click="cardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+            <div class="imgHolder">
+              <img ng-click="cardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+            </div>
             <span ng-click="cardClick({card: card})" ng-if="card.isFoil == true" class="foil">FOIL</span>
         </li>
         <li data-ng-repeat="card in landCards track by $index">
-            <img ng-click="landCardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+            <div class="imgHolder">
+              <img ng-click="landCardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+            </div>
             <span ng-click="landCardClick({card: card})" data-ng-if="card.isFoil == true" class="foil">FOIL</span>
         </li>
     </ul>

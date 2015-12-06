@@ -27,6 +27,13 @@
             if (additionalCardsFunc != null) {
                 this.addAdditionalCardsToPacks = additionalCardsFunc;
             }
+
+            var self = this;
+            this.copy = function() {
+                var cpy = JSON.parse(JSON.stringify(self));
+                cpy.addAdditionalCardsToPacks = self.addAdditionalCardsToPacks;
+                return cpy;
+            }
         }
 
         function addPromoForLatestSet(currentCards) {
@@ -84,7 +91,7 @@
                 var group = setToCopy[groupNumber];
                 var copyGroup = [];
                 for (var setNumber = 0; setNumber < group.length; setNumber++) {
-                    var setCopy = $.extend({}, group[setNumber]);
+                    var setCopy = group[setNumber].copy();
                     copyGroup.push(setCopy);
                 }
                 copy.push(copyGroup);
@@ -238,7 +245,7 @@
                 var cardToAdd = allCards.commonCards[cardNumberToGet];
                 if (cardToAdd != null) {
                     var containsCard = false;
-                    $.each(cards.commonCards, function (index, value) {
+                    cards.commonCards.map(function(index, value) {
                         if (value.Number == cardToAdd.Number) {
                             containsCard = true;
                         }
@@ -256,7 +263,7 @@
                 var cardToAdd = allCards.uncommonCards[cardNumberToGet];
                 if (cardToAdd != null) {
                     var containsCard = false;
-                    $.each(cards.uncommonCards, function (index, value) {
+                    cards.uncommonCards.map(function(index, value) {
                         if (value.Number == cardToAdd.Number) {
                             containsCard = true;
                         }

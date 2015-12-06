@@ -1,19 +1,17 @@
 ﻿(function () {
     'use strict';
 
-    angular.module("mtgApp").directive("handSimulator", ['$mdDialog', function ($mdDialog) { //'$modal'
+    angular.module("mtgApp").directive("handSimulator", ['$mdDialog', function ($mdDialog) {
 
         return {
             scope: {
                 selectedCards: '=',
                 selectedLandCards: '=',
                 isEnabled: '='
-                // controllerId: '@'
             },
             restrict: 'AE',
             templateUrl: '/app/directives/handSimulator.html',
             controller: function ($scope, $element) {
-                // var log = common.logger.getLogFn($scope.controllerId);
 
                 $scope.openHandSimulator = function (ev) {
                     var allSelectedCards = $scope.selectedCards.concat($scope.selectedLandCards);
@@ -28,8 +26,6 @@
                             fullDeck: allSelectedCards
                         }
                       });
-                    } else {
-                        // log("Please add some cards to your deck (click on them above).");
                     }
                     // trackEvent($scope.controllerId, 'opened-hand-simulator');
                 };
@@ -98,9 +94,7 @@
             if (nextCard != null) {
                 $scope.handCards.push(nextCard);
             } else {
-                var log = logger.logStandard;
-                var logError = log.logError;
-                logError("There are no more cards to draw");
+                log.logError("There are no more cards to draw");
             }
             trackEvent(controllerId, 'draw-next-card');
         }

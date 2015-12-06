@@ -2,7 +2,7 @@
   'use strict';
 
   var app = angular.module('mtgApp', ['ngMaterial', 'ngRoute']);
-  
+
   app.config(function($mdThemingProvider, $mdIconProvider) {
 
        $mdIconProvider
@@ -15,8 +15,8 @@
            .icon("phone"      , "./assets/svg/phone.svg"       , 512);
 
            $mdThemingProvider.theme('default')
-               .primaryPalette('blue-grey')
-               .accentPalette('cyan');
+               .primaryPalette('deep-orange')
+               .accentPalette('indigo');
 
    });
 

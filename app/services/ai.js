@@ -147,7 +147,7 @@
 
         function getNumberOfMatchingColors(card, aisColors) {
             var numberOfMatches = 0;
-            $.each(card.Color, function (index, value) {
+            card.Color.map(function(index, value) {
                 if (aisColors.indexOf(value) != -1) {
                     numberOfMatches++;
                 }
