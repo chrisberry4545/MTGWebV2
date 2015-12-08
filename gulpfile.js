@@ -8,6 +8,14 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
 
+var paths = {
+  styles: {
+      src: './css/sass',
+      files: './css/sass/*.scss',
+      dest: './css'
+  }
+};
+
 
 var displayError = function(error) {
 
@@ -28,19 +36,14 @@ var displayError = function(error) {
 
 // Setting up the sass task
 gulp.task('sass', function (){
-    var styles = {
-        src: './css/sass',
-        files: './css/sass/*.scss',
-        dest: './css'
-    }
     // Taking the path from the above object
-    gulp.src(styles.files)
+    gulp.src(paths.styles.files)
     // Sass options - make the output compressed and add the source map
     // Also pull the include path from the paths object
     .pipe(sass({
         outputStyle: 'compressed',
         sourceComments: 'map',
-        includePaths : [styles.src]
+        includePaths : [paths.styles.src]
     }))
     // If there is an error, don't stop compiling but use the custom displayError function
     .on('error', function(err){
@@ -51,26 +54,25 @@ gulp.task('sass', function (){
         'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'
     ))
     // Funally put the compiled sass into a css file
-    .pipe(gulp.dest(styles.dest));
-});
+    .pipe(gulp.dest(paths.styles.dest));
 
-//Combine vendor css
-gulp.task('css', function() {
 
-  var cssToCombine = [
-    './bower_components/angular-material/angular-material.min.css',
-    './css/font-awesome.min.css',
-    './css/app.css'
-  ];
 
-  gulp.src(cssToCombine)
-    .pipe(concat('app.css'))
-    .pipe(gulp.dest('dist'))
-    .pipe(rename('app.min.css'))
-    .pipe(minifyCss())
-    .pipe(gulp.dest('dist'))
+    var cssToCombine = [
+      './bower_components/angular-material/angular-material.min.css',
+      './css/font-awesome.min.css',
+      './css/app.css'
+    ];
+
+    gulp.src(cssToCombine)
+      .pipe(concat('app.css'))
+      .pipe(gulp.dest('dist'))
+      .pipe(rename('app.min.css'))
+      .pipe(minifyCss())
+      .pipe(gulp.dest('dist'))
 
 });
+
 
 gulp.task('browser-sync', function() {
     browserSync.init({
@@ -92,6 +94,7 @@ gulp.task('scripts', function(cb) {
     './app/services/FileSaver.min.js',
     './app/app.js',
     './app/config/routes.js',
+    './app/config/appcache.js',
     './app/sidebar.js',
     './app/startScreen/startScreen.js',
     './app/draftsim/draftsim.js',
@@ -151,7 +154,7 @@ gulp.task('scripts', function(cb) {
 
 // This is the default task - which is run when `gulp` is run
 // The tasks passed in as an array are run before the tasks within the function
-gulp.task('default', ['sass', 'scripts', 'css', 'browser-sync'], function() {
+gulp.task('default', ['sass', 'scripts', 'browser-sync'], function() {
     // Watch the files in the paths object, and when there is a change, fun the functions in the array
     gulp.watch(paths.styles.files, ['sass'])
     // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
@@ -160,4 +163,7 @@ gulp.task('default', ['sass', 'scripts', 'css', 'browser-sync'], function() {
             '[watcher] File ' + evt.path.replace(/.*(?=sass)/,'') + ' was ' + evt.type + ', compiling...'
         );
     });
+
+    gulp.watch(['./app/**/*.js', './app/*.js'], ['scripts']);
+
 });

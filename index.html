@@ -4,6 +4,8 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,500,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="./dist/app.min.css" />
 
+  <style>.ng-hide {display:none !important;}</style>
+
   <link rel="icon" type="image/png" href="/mtgmirrorfavicon.png">
 
   <title>MTG Mirror - Battle for Zendikar Draft and Sealed Simulator</title>
@@ -40,7 +42,7 @@
   </script>
 
 </head>
-<body ng-app="mtgApp" ng-cloak >
+<body ng-app="mtgApp">
 
   <div ng-controller="sidebar">
     <md-toolbar md-scroll-shrink ng-if="true" class="topBanner">
@@ -55,7 +57,7 @@
             </a>
           </h2>
         </div>
-        <div class="topNavLinks">
+        <div class="topNavLinks ng-hide" ng-show="true">
           <div class="topNavLinksFloat">
             <md-button ng-href="#{{r.url}}" data-ng-class="isCurrent(r)" class="topNavSpan topNavRoute menuItem" data-ng-repeat="r in topNavRoutes">
               {{r.config.settings.content}}
@@ -70,7 +72,7 @@
       </div>
     </md-toolbar>
 
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="nav">
+    <md-sidenav ng-show="true" class="md-sidenav-left md-whiteframe-z2 ng-hide" md-component-id="nav">
 
         <md-toolbar class="md-theme-light">
           <h2 class="md-toolbar-tools">Menu</h2>
@@ -87,60 +89,33 @@
     </md-sidenav>
   </div>
 
+  <h1 ng-hide="true">
+    MTG Mirror - Battle for Zendikar Draft and Sealed Simulator
+  </h1>
+
   <div ng-view></div>
+
+  <div ng-controller="appcache">
+    <div class="appCacheWarnings appUpdated ng-hide fade" ng-show="appUpdated">
+        <div ng-click="refreshApp()">
+          A new version of the app is avaliable. <br />
+          <em>Refresh to start using it!</em>
+        </div>
+        <md-button ng-click="closeAppUpdatedWarning()" class="md-primary closeWarnings" aria-label="Close warnings">
+          <i class="fa fa-close white"></i>
+        </md-button>
+    </div>
+    <div class="appCacheWarnings appIsUpdating ng-hide fade" ng-show="appIsUpdating">
+        <span>Initialising a new version of the app.</span><br />
+        <span>This usually takes around a minute.</span>
+        <md-button ng-click="closeAppLoadingWarning()" class="md-primary closeWarnings" aria-label="Close warnings">
+          <i class="fa fa-close white"></i>
+        </md-button>
+    </div>
+  </div>
 
   <script type="text/javascript" src="./dist/js/vendor.min.js"></script>
   <script type="text/javascript" src="./dist/js/app.min.js"></script>
-
-  <!-- <script src="./bower_components/angular/angular.min.js"></script>
-  <script src="./bower_components/angular-route/angular-route.min.js"></script>
-  <script src="./bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="./bower_components/angular-aria/angular-aria.min.js"></script>
-  <script type="text/javascript" src="./bower_components/angular-material/angular-material.min.js"></script>
-  <script type="text/javascript" src="./bower_components/Chart.js/Chart.min.js"></script> -->
-
-
-
-  <!-- <script type="text/javascript" src="./app/services/FileSaver.min.js"></script>
-  <script src="./app/app.js"> </script>
-  <script src="./app/config/routes.js"></script>
-  <script src="./app/sidebar.js"></script>
-  <script src="./app/startScreen/startScreen.js"></script>
-  <script src="./app/draftsim/draftsim.js"></script>
-  <script src="./app/sealedsim/sealedsim.js"></script>
-  <script src="./app/browsecards/browsecards.js"></script>
-  <script src="./app/boostersim/boostersim.js"></script>
-  <script src="./app/about/about.js"></script>
-
-  <script src="./app/services/datacontext.js"></script>
-  <script src="./app/services/deckFunctions.js"></script>
-  <script src="./app/services/downloadDataService.js"></script>
-  <script src="./app/services/graphAnalysis.js"></script>
-  <script src="./app/services/landcards.js"></script>
-  <script src="./app/services/localStorageService.js"></script>
-  <script src="./app/services/ai.js"></script>
-  <script src="./app/services/logger.js"></script>
-
-  <script src="./app/directives/cardDisplay.js"></script>
-  <script src="./app/directives/handSimulator.js"></script>
-  <script src="./app/directives/poolSummaryCharts.js"></script>
-  <script src="./app/directives/setSelection.js"></script>
-  <script src="./app/directives/optionsMenu.js"></script>
-
-  <script src="./app/carddata/CardsBFZ.js"></script>
-  <script src="./app/carddata/CardsBNG.js"></script>
-  <script src="./app/carddata/CardsDTK.js"></script>
-  <script src="./app/carddata/CardsExpeditionsBFZ.js"></script>
-  <script src="./app/carddata/CardsFRF.js"></script>
-  <script src="./app/carddata/CardsJOU.js"></script>
-  <script src="./app/carddata/CardsKTK.js"></script>
-  <script src="./app/carddata/CardsM15.js"></script>
-  <script src="./app/carddata/CardsMM2.js"></script>
-  <script src="./app/carddata/CardsORI.js"></script>
-  <script src="./app/carddata/CardsTHS.js"></script> -->
-
-
-
 </body>
 
 </html>

@@ -2,8 +2,14 @@
     <h3 class="cardPanelTitle">{{title}}</h3>
     <md-button ng-disabled="cards.length + landCards.length == 0" ng-if="showClear()" class="clearBtn" ng-click="clearFunction()" aria-label="Clear selection">
       Clear
+      <md-tooltip md-direction="bottom">
+          Clear selection
+      </md-tooltip>
     </md-button>
     <md-button ng-if="showSave == 'true'" class="saveBtn" ng-click="saveSelection()" aria-label="Save selection">
+      <md-tooltip md-direction="bottom">
+          Download as .txt file
+      </md-tooltip>
       <md-icon class="fa fa-download fa-2x"></md-icon>
     </md-button>
 

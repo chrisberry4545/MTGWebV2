@@ -28,6 +28,7 @@ body, html {
   font-family: 'Roboto', sans-serif;
   overflow:hidden;
   max-height: calc(100vh - 50px);
+  min-width:300px;
 }
 body {
   background-color: $lightBackgroundColor;
@@ -40,8 +41,11 @@ input, select {
   width: 180px;
   padding:0.3rem;
 }
+label {
+  cursor: pointer;
+}
 
-h2, h3, h4, button, label, select, input, a, .md-button, p {
+h1, h2, h3, h4, button, label, select, input, a, .md-button, p {
   font-weight: 100;
   font-family: 'Roboto', sans-serif;
 }
@@ -55,6 +59,9 @@ $elementSpacing: 1.5rem;
 }
 .halfElementSpacing {
   margin-top: $elementSpacing / 2;
+}
+.bolderText {
+  font-weight: 400;
 }
 
 .iconBtn {
@@ -165,7 +172,7 @@ $advertSectionHeight: 100px;
       }
     }
     &:nth-child(3), &:nth-child(4) {
-      @media(min-width: 850px) {
+      @media(min-width: 870px) {
         display:inline-block;
       }
     }
@@ -241,6 +248,9 @@ $advertSectionHeight: 100px;
   @media(min-width: $mdWidth) {
     display:block;
   }
+}
+.mainText {
+  font-size: 1.1rem;
 }
 .mainBtns {
   margin-top: 1rem;
@@ -434,4 +444,34 @@ $graphColumnWidth: 425px;
     -webkit-box-shadow: #e67e22 0 0 0px 25px inset;
     box-shadow: #e67e22 0 0 0px 25px inset;
   }
+}
+
+.appCacheWarnings {
+  position:fixed;
+  bottom:0;
+  left:0;
+  text-align: center;
+  opacity: 0.87;
+  width:100%;
+  padding: 1rem;
+  font-weight: 400;
+  border-top: 1px solid black;
+}
+.appUpdated {
+  background: teal;
+  color:white;
+  cursor:pointer;
+}
+.appIsUpdating {
+  background: rgb(255,87,34);
+  color: white;
+}
+.fade.ng-hide {
+  transition:0.5s linear all;
+  opacity:0;
+}
+.closeWarnings {
+  position: absolute;
+  bottom: 10px;
+  right: 125px;
 }

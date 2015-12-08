@@ -215,7 +215,7 @@ var BFZ = [
 {Name:"March from the Tomb", Cost:"3WB", Color:["W","B"], Rarity:"R", Type:["S"], Rating:"7", Sort:"1", Set:"BFZ", Number:"214", Image:"/Images/BFZ/MarchfromtheTomb.jpg"},
 {Name:"Munda, Ambush Leader", Cost:"2RW", Color:["R","W"], Rarity:"R", Type:["C"], Rating:"8", Sort:"1", Set:"BFZ", Number:"215", Image:"/Images/BFZ/Munda--AmbushLeader.jpg"},
 {Name:"Noyan Dar, Roil Shaper", Cost:"3WU", Color:["W","U"], Rarity:"R", Type:["C"], Rating:"8", Sort:"1", Set:"BFZ", Number:"216", Image:"/Images/BFZ/NoyanDar--RoilShaper.jpg"},
-{Name:"Omnath, Locus of Rage", Cost:"2RRGG", Color:["R","G"], Rarity:"M", Type:["C"], Rating:"9", Sort:"1", Set:"BFZ", Number:"217", Image:"/Images/BFZ/Omnath--LocusofRage.jpg"},
+{Name:"Omnath, Locus of Rage", Cost:"3RRGG", Color:["R","G"], Rarity:"M", Type:["C"], Rating:"9", Sort:"1", Set:"BFZ", Number:"217", Image:"/Images/BFZ/Omnath--LocusofRage.jpg"},
 {Name:"Resolute Blademaster", Cost:"3WR", Color:["W","R"], Rarity:"U", Type:["C"], Rating:"7", Sort:"1", Set:"BFZ", Number:"218", Image:"/Images/BFZ/ResoluteBlademaster.jpg"},
 {Name:"Roil Spout", Cost:"1WU", Color:["W","U"], Rarity:"U", Type:["S"], Rating:"7", Sort:"1", Set:"BFZ", Number:"219", Image:"/Images/BFZ/RoilSpout.jpg"},
 {Name:"Skyrider Elf", Cost:"0UG", Color:["U","G"], Rarity:"U", Type:["C"], Rating:"7", Sort:"1", Set:"BFZ", Number:"220", Image:"/Images/BFZ/SkyriderElf.jpg"},
