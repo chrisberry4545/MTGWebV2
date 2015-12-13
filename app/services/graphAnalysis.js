@@ -16,14 +16,14 @@
             resetAllCanvas: resetAllCanvas
         };
 
-        var whiteColor = '#E0D0E0;';//'#FFFFCC';
-        var blueColor ='#058dc7';// 'rgba(29,151,152,0.5)';
-        var blackColor = '#11140c';//'rgba(6,6,6,0.7)';
-        var redColor = '#CC0000';//'rgba(216,90,91,0.8)';
-        var greenColor = '#50b432';// 'rgba(74,106,41,0.8)';
-        var whiteColor_highlight = '#FFFFCC';
+        var whiteCol = '#CCC';
+        var blueColor ='#058dc7';
+        var blackColor = '#11140c';
+        var redColor = '#CC0000';
+        var greenColor = '#50b432';
+        var whiteCol_highlight = '#FFF';
         var blueColor_highlight = '#33CCFF';
-        var blackColor_highlight = 'rgba(0,0,0,0.7)';
+        var blackColor_highlight = '#000000';
         var redColor_highlight = '#db4437';
         var greenColor_highlight = '#99FF99';
 
@@ -33,8 +33,8 @@
         var cardType_sorcery_color_highlight = redColor_highlight;
         var cardType_instant_color = blueColor;
         var cardType_instant_color_highlight = blueColor_highlight;
-        var cardType_enchantment_color = whiteColor;
-        var cardType_enchantment_color_highlight = whiteColor_highlight;
+        var cardType_enchantment_color = whiteCol;
+        var cardType_enchantment_color_highlight = whiteCol_highlight;
         var cardType_land_color = '#006600';
         var cardType_land_color_highlight = '#00CC66';
         var cardType_planeswalker_color = '#FF0066';
@@ -208,8 +208,8 @@
             var data = [
                 {
                     value: colorData[0],
-                    color: whiteColor,
-                    highlight: whiteColor_highlight,
+                    color: whiteCol,
+                    highlight: whiteCol_highlight,
                     label: "White"
                 },
                 {

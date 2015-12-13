@@ -227,6 +227,17 @@
             return selectedCards;
         }
 
+        function isCardInArray(cardArray, cardToAdd) {
+          var containsCard = false;
+          cardArray.map(function(value, index) {
+            if (value.Number == cardToAdd.Number) {
+              containsCard = true;
+              return;
+            }
+          });
+          return containsCard;
+        }
+
         function openBooster(allCards, cardsArray)
         {
             var mythicChance = 1 / 8;
@@ -238,37 +249,25 @@
             var numberOfCommons = 10;
             var numberOfUncommons = 3;
 
-
+            var totalCommonCards = allCards.commonCards.length;
             for (var i = 0; i < numberOfCommons; i++)
             {
-                var cardNumberToGet = Math.round(Math.random() * (allCards.commonCards.length - 1));
-                var cardToAdd = allCards.commonCards[cardNumberToGet];
-                if (cardToAdd != null) {
-                    var containsCard = false;
-                    cards.commonCards.map(function(index, value) {
-                        if (value.Number == cardToAdd.Number) {
-                            containsCard = true;
-                        }
-                    });
-                    if (containsCard && allCards.commonCards.length > numberOfCommons) {
-                        i--;
-                    } else {
-                        cards.commonCards.push(cardToAdd);
-                    }
+              var cardNumberToGet = Math.round(Math.random() * (totalCommonCards - 1));
+              var cardToAdd = allCards.commonCards[cardNumberToGet];
+              if (cardToAdd != null) {
+                if (isCardInArray(cards.commonCards, cardToAdd) && totalCommonCards > numberOfCommons) {
+                    i--;
+                } else {
+                    cards.commonCards.push(cardToAdd);
                 }
+              }
             }
             for (var i = 0; i < numberOfUncommons; i++)
             {
                 var cardNumberToGet = Math.round(Math.random() * (allCards.uncommonCards.length - 1));
                 var cardToAdd = allCards.uncommonCards[cardNumberToGet];
                 if (cardToAdd != null) {
-                    var containsCard = false;
-                    cards.uncommonCards.map(function(index, value) {
-                        if (value.Number == cardToAdd.Number) {
-                            containsCard = true;
-                        }
-                    });
-                    if (containsCard) {
+                    if (isCardInArray(cards.uncommonCards, cardToAdd)) {
                         numberOfUncommons++;
                     } else {
                         cards.uncommonCards.push(cardToAdd);
