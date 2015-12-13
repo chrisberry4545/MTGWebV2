@@ -17,29 +17,6 @@
   <meta name="keywords" content="MTG, Magic the gathering, BFZ, Battle for Zendikar, draft, booster, simulator, mtgmirror, mirror">
   <meta name="author" content="Chris Berry">
 
-  <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-47296152-1']);
-      _gaq.push(['_setDomainName', 'mtgmirror.com']);
-      _gaq.push(['_trackPageview']);
-
-      (function () {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-      function trackPageView(page, eventName, label) {
-          trackAction('_trackPageview', page, eventName, label);
-      }
-      function trackEvent(page, eventName, label) {
-          trackAction('_trackEvent', page, eventName, label);
-      }
-      function trackAction(actionType, page, eventName, label) {
-          _gaq.push([actionType, page, eventName, label])
-      }
-  </script>
 
 </head>
 <body ng-app="mtgApp">
@@ -89,9 +66,12 @@
     </md-sidenav>
   </div>
 
-  <h1 ng-hide="true">
-    MTG Mirror - Battle for Zendikar Draft and Sealed Simulator
-  </h1>
+  <div ng-hide="true">
+    <h1>
+      MTG Mirror - Battle for Zendikar Draft and Sealed Simulator
+    </h1>
+    <h2>Loading...</h2>
+  </div>
 
   <div ng-view></div>
 
@@ -114,8 +94,34 @@
     </div>
   </div>
 
+
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47296152-1']);
+      _gaq.push(['_setDomainName', 'mtgmirror.com']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      function trackPageView(page, eventName, label) {
+          trackAction('_trackPageview', page, eventName, label);
+      }
+      function trackEvent(page, eventName, label) {
+          trackAction('_trackEvent', page, eventName, label);
+      }
+      function trackAction(actionType, page, eventName, label) {
+          _gaq.push([actionType, page, eventName, label])
+      }
+  </script>
+
   <script type="text/javascript" src="./dist/js/vendor.min.js"></script>
   <script type="text/javascript" src="./dist/js/app.min.js"></script>
+  <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 
 </html>

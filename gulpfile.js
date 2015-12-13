@@ -97,6 +97,7 @@ gulp.task('scripts', function(cb) {
     './app/config/appcache.js',
     './app/sidebar.js',
     './app/startScreen/startScreen.js',
+    './app/adverts/adverts.js',
     './app/draftsim/draftsim.js',
     './app/sealedsim/sealedsim.js',
     './app/browsecards/browsecards.js',
