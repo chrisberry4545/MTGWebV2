@@ -55,7 +55,9 @@
 
         function generateCardSetGroup() {
             return [
-                [new CardSet('Battle for Zendikar', 'BFZ', null, null, function (allCardsInSet, cardsInPack) {
+                [
+                  new CardSet('Oath of the Gatewatch', 'OGW'),
+                  new CardSet('Battle for Zendikar', 'BFZ', null, null, function (allCardsInSet, cardsInPack) {
                     var chanceOfExpedition = (1 / 6) * (15 / 249);
                     var random = Math.random();
                     if (random < chanceOfExpedition) {

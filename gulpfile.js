@@ -116,6 +116,7 @@ gulp.task('scripts', function(cb) {
     './app/directives/poolSummaryCharts.js',
     './app/directives/setSelection.js',
     './app/directives/optionsMenu.js',
+    './app/carddata/CardsOGW.js',
     './app/carddata/CardsBFZ.js',
     './app/carddata/CardsBNG.js',
     './app/carddata/CardsDTK.js',
