@@ -55,6 +55,9 @@
 
         function generateCardSetGroup() {
             return [
+                // [
+                //   new CardSet('Shadows over Innistrad', SOI)
+                // ],
                 [
                   new CardSet('Oath of the Gatewatch', 'OGW'),
                   new CardSet('Battle for Zendikar', 'BFZ', null, null, function (allCardsInSet, cardsInPack) {
@@ -177,6 +180,7 @@
             this.Set= card.Set,
             this.Number= card.Number,
             this.Image= card.Image
+            this.ReverseImage = card.ReverseImage;
         }
 
         function combineCardArrays(array1, array2) {

@@ -27,9 +27,9 @@
     <ul class="card-list">
         <li data-ng-repeat="card in cards track by $index">
             <div class="imgHolder">
-              <img ng-click="cardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+              <img ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false" ng-click="cardClick({card: card})" src="{{card.Image}}" ng-src="{{card.isReversed?card.ReverseImage:card.Image}}" class="mtgCard" alt="{{card.Name}}" />
             </div>
-            <span ng-click="cardClick({card: card})" ng-if="card.isFoil == true" class="foil">FOIL</span>
+            <span ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false" ng-click="cardClick({card: card})" ng-if="card.isFoil == true" class="foil">FOIL</span>
         </li>
         <li data-ng-repeat="card in landCards track by $index">
             <div class="imgHolder">

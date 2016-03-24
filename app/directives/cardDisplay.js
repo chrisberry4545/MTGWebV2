@@ -21,7 +21,7 @@
               $scope.saveSelection = function() {
                 downloadDataService.saveCardsList($scope.cards.concat($scope.landCards), $scope.title);
                 // trackEvent(controllerId, 'save-selected-cards');
-              }
+              };
             },
             restrict: 'AE',
             templateUrl: '/app/directives/cardDisplay.html'
