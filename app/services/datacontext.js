@@ -55,9 +55,9 @@
 
         function generateCardSetGroup() {
             return [
-                // [
-                //   new CardSet('Shadows over Innistrad', SOI)
-                // ],
+                [
+                  new CardSet('Shadows over Innistrad', 'SOI')
+                ],
                 [
                   new CardSet('Oath of the Gatewatch', 'OGW'),
                   new CardSet('Battle for Zendikar', 'BFZ', null, null, function (allCardsInSet, cardsInPack) {
