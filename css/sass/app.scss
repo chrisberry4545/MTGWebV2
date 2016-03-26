@@ -10,6 +10,11 @@ $lightColor: #FF5722;
 $fontColor: rgba(0,0,0,0.87);
 $lightFontColor: white;
 
+.smOnly {
+  @media(min-width: $mdWidth) {
+    display: none;
+  }
+}
 .mdUp {
   display:none;
   @media(min-width:$mdWidth) {
@@ -352,6 +357,16 @@ $graphColumnWidth: 425px;
     position:absolute;
   }
 }
+
+  .mtgCard__flipper {
+    position: absolute;
+    top: 33px;
+    right: 16px;
+
+    @media(min-width: $lgWidth) {
+      display: none;
+    }
+  }
 
 .clearBtn {
   position: absolute;

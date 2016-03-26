@@ -116,6 +116,7 @@ gulp.task('scripts', function(cb) {
     './app/directives/poolSummaryCharts.js',
     './app/directives/setSelection.js',
     './app/directives/optionsMenu.js',
+    './app/carddata/CardsSOI.js',
     './app/carddata/CardsOGW.js',
     './app/carddata/CardsBFZ.js',
     './app/carddata/CardsBNG.js',
@@ -156,16 +157,16 @@ gulp.task('scripts', function(cb) {
 
 // This is the default task - which is run when `gulp` is run
 // The tasks passed in as an array are run before the tasks within the function
-gulp.task('default', ['sass', 'scripts', 'browser-sync'], function() {
+gulp.task('default', ['sass', 'scripts'], function() {
     // Watch the files in the paths object, and when there is a change, fun the functions in the array
-    gulp.watch(paths.styles.files, ['sass'])
-    // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
-    .on('change', function(evt) {
-        console.log(
-            '[watcher] File ' + evt.path.replace(/.*(?=sass)/,'') + ' was ' + evt.type + ', compiling...'
-        );
-    });
-
-    gulp.watch(['./app/**/*.js', './app/*.js'], ['scripts']);
+    // gulp.watch(paths.styles.files, ['sass'])
+    // // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
+    // .on('change', function(evt) {
+    //     console.log(
+    //         '[watcher] File ' + evt.path.replace(/.*(?=sass)/,'') + ' was ' + evt.type + ', compiling...'
+    //     );
+    // });
+    //
+    // gulp.watch(['./app/**/*.js', './app/*.js'], ['scripts']);
 
 });

@@ -22,6 +22,14 @@
                 downloadDataService.saveCardsList($scope.cards.concat($scope.landCards), $scope.title);
                 // trackEvent(controllerId, 'save-selected-cards');
               };
+              $scope.reverseCard = function(card) {
+                if (!card.isReversed) {
+                  card.isReversed = true;
+                } else {
+                  card.isReversed = false;
+                }
+                // $scope.$apply();
+              }
             },
             restrict: 'AE',
             templateUrl: '/app/directives/cardDisplay.html'
