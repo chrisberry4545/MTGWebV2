@@ -98,16 +98,16 @@
                     var chanceOfRareOrMythicFlip = 1 / 8;
                     var random = Math.random();
                     if (random < chanceOfRareOrMythicFlip) {
-                      cardsInPack.commonCards.pop(); //Replaces a common
+                      cardsInPack.commonCards.shift(); //Replaces a common
                       var randCard = SOI[selectRandomValueFromArray(rareAndMythicFlipCards)];
                       addCardToCorrectPartOfCards(randCard, cardsInPack);
                     }
 
                     var commonOrUncommonFlipCard = SOI[selectRandomValueFromArray(commonAndUncommonFlipCards)];
                     if (commonOrUncommonFlipCard.Rarity == 'U') {
-                      cardsInPack.uncommonCards.pop();
+                      cardsInPack.uncommonCards.shift();
                     } else {
-                      cardsInPack.commonCards.pop();
+                      cardsInPack.commonCards.shift();
                     }
                     addCardToCorrectPartOfCards(commonOrUncommonFlipCard, cardsInPack);
 
