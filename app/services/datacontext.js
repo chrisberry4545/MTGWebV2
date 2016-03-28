@@ -91,6 +91,7 @@
             return [
                 [
                   new CardSet('Shadows over Innistrad', 'SOI', null, null, function(allCardsInSet, cardsInPack) {
+
                     var rareAndMythicFlipCards = [4, 20, 87, 91, 107, 158, 224, 242, 280];
                     var commonAndUncommonFlipCards = [5, 33, 45, 48, 53, 93, 96, 115, 118, 146, 148, 157, 168, 181, 189, 193, 202, 208, 209, 214, 228, 255, 259, 265];
 
@@ -217,7 +218,9 @@
 
             selectedCards = addFoilCards(getCardsForShortName(cardSet.shortName), selectedCards, cardSet.boostersToOpen, cardSet.foilReplacesCommon, cardSet.chanceOfFoil);
 
-            selectedCards = cardSet.addAdditionalCardsToPacks(cards, selectedCards);
+            for(var i = 0; i < cardSet.boostersToOpen; i++) {
+                selectedCards = cardSet.addAdditionalCardsToPacks(cards, selectedCards);
+            }
 
             sortCards(selectedCards);
 
