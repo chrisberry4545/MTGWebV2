@@ -90,6 +90,9 @@
         function generateCardSetGroup() {
             return [
                 [
+                    new CardSet('Eternal Masters', 'EMA')
+                ],
+                [
                   new CardSet('Shadows over Innistrad', 'SOI', null, null, function(allCardsInSet, cardsInPack) {
 
                     var rareAndMythicFlipCards = [4, 20, 87, 91, 107, 158, 224, 242, 280];
