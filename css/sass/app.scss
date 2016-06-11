@@ -10,6 +10,11 @@ $lightColor: #FF5722;
 $fontColor: rgba(0,0,0,0.87);
 $lightFontColor: white;
 
+.smOnly {
+  @media(min-width: $mdWidth) {
+    display: none;
+  }
+}
 .mdUp {
   display:none;
   @media(min-width:$mdWidth) {
@@ -27,7 +32,7 @@ body, html {
   margin:0;
   font-family: 'Roboto', sans-serif;
   overflow:hidden;
-  max-height: calc(100vh - 50px);
+  // max-height: calc(100vh - 50px);
   min-width:300px;
 }
 body {
@@ -353,6 +358,16 @@ $graphColumnWidth: 425px;
   }
 }
 
+  .mtgCard__flipper {
+    position: absolute;
+    top: 33px;
+    right: 16px;
+
+    @media(min-width: $lgWidth) {
+      display: none;
+    }
+  }
+
 .clearBtn {
   position: absolute;
   top:0;
@@ -475,3 +490,36 @@ $graphColumnWidth: 425px;
   bottom: 10px;
   right: 125px;
 }
+
+
+
+
+$filterBorderColor: #CCC;
+$filterBorder: 1px solid $filterBorderColor;
+
+.c-filter {
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+    .c-filter__group {
+        border-top: $filterBorder;
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        &:last-child {
+            border-bottom: $filterBorder;
+        }
+    }
+
+    .c-filter__btn {
+        border: $filterBorder;
+    }
+
+        .c-filter__btn--active {
+            border-color: #888;
+            font-weight: 400;
+            color: orange;
+        }

@@ -1,5 +1,5 @@
 var OGW = [
-{Name:"Deceiver of Form", Cost:"7", Color:["C"], Rarity:"R", Type:["C"], Rating:"8", Sort:"1", Set:"OGW", Number:"1", Image:"/Images/OGW/DeceiverofForm.jpg"},
+{Name:"Deceiver of Form", Cost:"7", Color:["C"], Rarity:"R", Type:["C"], Rating:"8", Sort:"1", Set:"OGW", Number:"1", Image:"/Images/OGW/DeceiverofForm.jpg", ReverseImage:"/Images/OGW/EldraziMimic.jpg"},
 {Name:"Eldrazi Mimic", Cost:"2", Color:["C"], Rarity:"R", Type:["C"], Rating:"6", Sort:"1", Set:"OGW", Number:"2", Image:"/Images/OGW/EldraziMimic.jpg"},
 {Name:"Endbringer", Cost:"6", Color:["C"], Rarity:"R", Type:["C"], Rating:"7", Sort:"1", Set:"OGW", Number:"3", Image:"/Images/OGW/Endbringer.jpg"},
 {Name:"Kozilek, the Great Distortion", Cost:"10", Color:["C"], Rarity:"M", Type:["C"], Rating:"8", Sort:"1", Set:"OGW", Number:"4", Image:"/Images/OGW/Kozilek--theGreatDistortion.jpg"},

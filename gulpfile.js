@@ -88,7 +88,6 @@ gulp.task('minimages', function(cb) {
     })).pipe(gulp.dest('Images')).on('end', cb).on('error', cb);
 });
 
-gulp.task('scripts', function(cb) {
 
   var scripts = [
     './app/services/FileSaver.min.js',
@@ -110,12 +109,15 @@ gulp.task('scripts', function(cb) {
     './app/services/landcards.js',
     './app/services/localStorageService.js',
     './app/services/ai.js',
+    './app/services/mappings.js',
     './app/services/logger.js',
     './app/directives/cardDisplay.js',
     './app/directives/handSimulator.js',
     './app/directives/poolSummaryCharts.js',
     './app/directives/setSelection.js',
     './app/directives/optionsMenu.js',
+    './app/carddata/CardsEMA.js',
+    './app/carddata/CardsSOI.js',
     './app/carddata/CardsOGW.js',
     './app/carddata/CardsExpeditionsOGW.js',
     './app/carddata/CardsBFZ.js',
@@ -131,21 +133,39 @@ gulp.task('scripts', function(cb) {
     './app/carddata/CardsTHS.js'
   ];
 
+
+var vendorScripts = [
+'./bower_components/angular/angular.min.js',
+'./bower_components/angular-route/angular-route.min.js',
+'./bower_components/angular-animate/angular-animate.min.js',
+'./bower_components/angular-aria/angular-aria.min.js',
+'./bower_components/angular-material/angular-material.min.js',
+'./bower_components/Chart.js/Chart.min.js'
+];
+
+gulp.task('scripts-dev', function(cb) {
+
+
+  gulp.src(scripts)
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest('dist/js'))
+
+  gulp.src(vendorScripts)
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('dist/js'));
+});
+
+
+
+gulp.task('scripts', function(cb) {
+
+
   gulp.src(scripts)
         .pipe(concat('app.js'))
         .pipe(gulp.dest('dist/js'))
         .pipe(rename('app.min.js'))
         .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('dist/js'));
-
-  var vendorScripts = [
-    './bower_components/angular/angular.min.js',
-    './bower_components/angular-route/angular-route.min.js',
-    './bower_components/angular-animate/angular-animate.min.js',
-    './bower_components/angular-aria/angular-aria.min.js',
-    './bower_components/angular-material/angular-material.min.js',
-    './bower_components/Chart.js/Chart.min.js'
-  ];
 
   gulp.src(vendorScripts)
         .pipe(concat('vendor.js'))
@@ -157,16 +177,16 @@ gulp.task('scripts', function(cb) {
 
 // This is the default task - which is run when `gulp` is run
 // The tasks passed in as an array are run before the tasks within the function
-gulp.task('default', ['sass', 'scripts', 'browser-sync'], function() {
+gulp.task('default', ['sass', 'scripts'], function() {
     // Watch the files in the paths object, and when there is a change, fun the functions in the array
-    gulp.watch(paths.styles.files, ['sass'])
-    // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
-    .on('change', function(evt) {
-        console.log(
-            '[watcher] File ' + evt.path.replace(/.*(?=sass)/,'') + ' was ' + evt.type + ', compiling...'
-        );
-    });
-
-    gulp.watch(['./app/**/*.js', './app/*.js'], ['scripts']);
+    // gulp.watch(paths.styles.files, ['sass'])
+    // // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
+    // .on('change', function(evt) {
+    //     console.log(
+    //         '[watcher] File ' + evt.path.replace(/.*(?=sass)/,'') + ' was ' + evt.type + ', compiling...'
+    //     );
+    // });
+    //
+    // gulp.watch(['./app/**/*.js', './app/*.js'], ['scripts']);
 
 });

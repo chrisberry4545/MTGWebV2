@@ -32,7 +32,9 @@
                     land-cards="vm.landcards"
                     land-card-click="vm.addLandCard(card)"
                     title="Cards from packs ({{vm.boosterCards.length}})"
-                    show-save="true" />
+                    show-save="true"
+                    allow-sorting="true"
+                    allow-filters="true" />
     </div>
 
     <div>
@@ -43,7 +45,9 @@
                     title="Selected cards ({{vm.selectedCards.length + vm.selectedLandCards.length}})"
                     clear-function="vm.clearSelection()"
                     show-save="true"
-                    allow-test-hands="true" />
+                    allow-test-hands="true"
+                    allow-sorting="true"
+                    allow-filters="true" />
     </div>
   </div>
 

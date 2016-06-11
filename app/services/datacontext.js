@@ -5,7 +5,7 @@
     angular.module('mtgApp').factory(serviceId,
         ['$q', 'landcards', datacontext]);
 
-    function datacontext($q, landcards) {
+    function datacontext($q, $filter, landcards) {
         var service = {
             getCardSetByRarity: getCardSetByRarity,
             getCardSetGroups: getCardSetGroups,
@@ -53,9 +53,71 @@
             currentCards.splice(0, 0, promoCard);
         }
 
+        function selectRandomValueFromArray(arrayToSelectFrom) {
+          var random = Math.random();
+          return arrayToSelectFrom[Math.floor(random * arrayToSelectFrom.length)];
+        }
+
+        function getCardsInPackWithProperty(cardsInPack, propertyToExamine, valueToFind) {
+            var cardsWithValue = [];
+            cardsInPack.forEach(function(card) {
+              if (card[propertyToExamine] == valueToFind) {
+                cardsWithValue.push(card);
+              }
+            });
+            return cardsWithValue;
+        }
+
+
+        function addCardToCorrectPartOfCards(card, allCards) {
+          switch(card.Rarity) {
+            case 'M':
+              allCards.mythicCards.push(card);
+              break;
+            case 'R':
+              allCards.rareCards.push(card);
+              break;
+            case 'U':
+              allCards.uncommonCards.push(card);
+              break;
+            case 'C':
+              allCards.commonCards.push(card);
+              break;
+          }
+          return allCards;
+        }
+
 
         function generateCardSetGroup() {
             return [
+                [
+                    new CardSet('Eternal Masters', 'EMA')
+                ],
+                [
+                  new CardSet('Shadows over Innistrad', 'SOI', null, null, function(allCardsInSet, cardsInPack) {
+
+                    var rareAndMythicFlipCards = [4, 20, 87, 91, 107, 158, 224, 242, 280];
+                    var commonAndUncommonFlipCards = [5, 33, 45, 48, 53, 93, 96, 115, 118, 146, 148, 157, 168, 181, 189, 193, 202, 208, 209, 214, 228, 255, 259, 265];
+
+                    var chanceOfRareOrMythicFlip = 1 / 8;
+                    var random = Math.random();
+                    if (random < chanceOfRareOrMythicFlip) {
+                      cardsInPack.commonCards.shift(); //Replaces a common
+                      var randCard = SOI[selectRandomValueFromArray(rareAndMythicFlipCards)];
+                      addCardToCorrectPartOfCards(randCard, cardsInPack);
+                    }
+
+                    var commonOrUncommonFlipCard = SOI[selectRandomValueFromArray(commonAndUncommonFlipCards)];
+                    if (commonOrUncommonFlipCard.Rarity == 'U') {
+                      cardsInPack.uncommonCards.shift();
+                    } else {
+                      cardsInPack.commonCards.shift();
+                    }
+                    addCardToCorrectPartOfCards(commonOrUncommonFlipCard, cardsInPack);
+
+                    return cardsInPack;
+                  })
+                ],
                 [
                   new CardSet('Oath of the Gatewatch', 'OGW', null, null, function (allCardsInSet, cardsInPack) {
                       var chanceOfExpedition = (1 / 6) * (15 / 249);
@@ -66,6 +128,7 @@
                       }
                       return cardsInPack;
                   }),
+
                   new CardSet('Battle for Zendikar', 'BFZ', null, null, function (allCardsInSet, cardsInPack) {
                       var chanceOfExpedition = (1 / 6) * (15 / 249);
                       var random = Math.random();
@@ -168,7 +231,9 @@
 
             selectedCards = addFoilCards(getCardsForShortName(cardSet.shortName), selectedCards, cardSet.boostersToOpen, cardSet.foilReplacesCommon, cardSet.chanceOfFoil);
 
-            selectedCards = cardSet.addAdditionalCardsToPacks(cards, selectedCards);
+            for(var i = 0; i < cardSet.boostersToOpen; i++) {
+                selectedCards = cardSet.addAdditionalCardsToPacks(cards, selectedCards);
+            }
 
             sortCards(selectedCards);
 
@@ -187,8 +252,9 @@
             this.Sort= card.Sort,
             this.Set= card.Set,
             this.Number= card.Number,
-            this.Image= card.Image,
+            this.Image= card.Image
             this.isFoil = card.isFoil;
+            this.ReverseImage = card.ReverseImage;
         }
 
         function combineCardArrays(array1, array2) {
@@ -241,6 +307,13 @@
             return selectedCards;
         }
 
+        function isCardInNormalBoosters(card) {
+          if (card.ReverseImage != null) {
+            return false;
+          }
+          return true;
+        }
+
         function isCardInArray(cardArray, cardToAdd) {
           var containsCard = false;
           cardArray.map(function(value, index) {
@@ -269,7 +342,7 @@
               var cardNumberToGet = Math.round(Math.random() * (totalCommonCards - 1));
               var cardToAdd = allCards.commonCards[cardNumberToGet];
               if (cardToAdd != null) {
-                if (isCardInArray(cards.commonCards, cardToAdd) && totalCommonCards > numberOfCommons) {
+                if (!isCardInNormalBoosters(cardToAdd) || (isCardInArray(cards.commonCards, cardToAdd) && totalCommonCards > numberOfCommons)) {
                     i--;
                 } else {
                     cards.commonCards.push(cardToAdd);
@@ -281,7 +354,7 @@
                 var cardNumberToGet = Math.round(Math.random() * (allCards.uncommonCards.length - 1));
                 var cardToAdd = allCards.uncommonCards[cardNumberToGet];
                 if (cardToAdd != null) {
-                    if (isCardInArray(cards.uncommonCards, cardToAdd)) {
+                    if (!isCardInNormalBoosters(cardToAdd) || isCardInArray(cards.uncommonCards, cardToAdd)) {
                         numberOfUncommons++;
                     } else {
                         cards.uncommonCards.push(cardToAdd);
@@ -290,13 +363,27 @@
             }
 
             if (!containsAMythic) {
-                var cardNumberToGet = Math.round(Math.random() * (allCards.rareCards.length - 1));
-                var cardToAdd = allCards.rareCards[cardNumberToGet];
-                cards.rareCards.push(cardToAdd);
+                function addRareCard() {
+                  var cardNumberToGet = Math.round(Math.random() * (allCards.rareCards.length - 1));
+                  var cardToAdd = allCards.rareCards[cardNumberToGet];
+                  if (!isCardInNormalBoosters(cardToAdd)) {
+                    addRareCard();
+                  } else {
+                    cards.rareCards.push(cardToAdd);
+                  }
+                }
+                addRareCard();
             } else {
-                var cardNumberToGet = Math.round(Math.random() * (allCards.mythicCards.length - 1));
-                var cardToAdd = allCards.mythicCards[cardNumberToGet];
-                cards.mythicCards.push(cardToAdd);
+                function addMythicCard() {
+                  var cardNumberToGet = Math.round(Math.random() * (allCards.mythicCards.length - 1));
+                  var cardToAdd = allCards.mythicCards[cardNumberToGet];
+                  if (!isCardInNormalBoosters(cardToAdd)) {
+                    addMythicCard();
+                  } else {
+                    cards.mythicCards.push(cardToAdd);
+                  }
+                }
+                addMythicCard();
             }
 
             return cards;

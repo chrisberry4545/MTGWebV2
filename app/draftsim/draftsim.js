@@ -43,8 +43,8 @@
     vm.fixedSetGroups = [];
     function initSetGroups() {
         datacontext.getCardSetGroups().then(function (data) {
-            data[0][0].boostersToOpen = 2; //Set latest set to open 6 boosters by default
-            data[0][1].boostersToOpen = 1;
+            data[0][0].boostersToOpen = 3; //Set latest set to open 6 boosters by default
+            // data[0][1].boostersToOpen = 1;
             vm.setGroups = data;
             trackEvent(controllerId, 'init');
         });
