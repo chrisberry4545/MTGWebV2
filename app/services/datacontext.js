@@ -13,7 +13,8 @@
             openBoostersForCardSetGroups: openBoostersForCardSetGroups,
             openBoosterForCardSet: openBoosterForCardSet,
             copyCardSetGroup: copyCardSetGroup,
-            addPromoForLatestSet: addPromoForLatestSet
+            addPromoForLatestSet: addPromoForLatestSet,
+            copyCard: copyCard
         };
 
         function CardSet(fullName, shortName, chanceOfFoil, foilReplacesCommon, additionalCardsFunc) {
@@ -56,15 +57,23 @@
         function generateCardSetGroup() {
             return [
                 [
-                  new CardSet('Oath of the Gatewatch', 'OGW'),
+                  new CardSet('Oath of the Gatewatch', 'OGW', null, null, function (allCardsInSet, cardsInPack) {
+                      var chanceOfExpedition = (1 / 6) * (15 / 249);
+                      var random = Math.random();
+                      if (random < chanceOfExpedition) {
+                          var randCard = ExpeditionsOGW[Math.floor(Math.random() * ExpeditionsBFZ.length)];
+                          cardsInPack.mythicCards.push(randCard);
+                      }
+                      return cardsInPack;
+                  }),
                   new CardSet('Battle for Zendikar', 'BFZ', null, null, function (allCardsInSet, cardsInPack) {
-                    var chanceOfExpedition = (1 / 6) * (15 / 249);
-                    var random = Math.random();
-                    if (random < chanceOfExpedition) {
-                        var randCard = ExpeditionsBFZ[Math.floor(Math.random() * ExpeditionsBFZ.length)];
-                        cardsInPack.mythicCards.push(randCard);
-                    }
-                    return cardsInPack;
+                      var chanceOfExpedition = (1 / 6) * (15 / 249);
+                      var random = Math.random();
+                      if (random < chanceOfExpedition) {
+                          var randCard = ExpeditionsBFZ[Math.floor(Math.random() * ExpeditionsBFZ.length)];
+                          cardsInPack.mythicCards.push(randCard);
+                      }
+                      return cardsInPack;
                 })],
                 [new CardSet('Magic Origins', 'ORI')],
                 [new CardSet('Modern Masters 2015', 'MM2', 1)],
@@ -142,7 +151,9 @@
                 for (var setNum = 0; setNum < currentGroup.length; setNum++) {
 
                     var currentSet = currentGroup[setNum];
-                    combineCardArrays(allCardsOpened, openBoosterForCardSet(currentSet));
+                    if (currentSet.boostersToOpen > 0) {
+                        combineCardArrays(allCardsOpened, openBoosterForCardSet(currentSet));
+                    }
 
                 }
 
@@ -176,7 +187,8 @@
             this.Sort= card.Sort,
             this.Set= card.Set,
             this.Number= card.Number,
-            this.Image= card.Image
+            this.Image= card.Image,
+            this.isFoil = card.isFoil;
         }
 
         function combineCardArrays(array1, array2) {

@@ -37,13 +37,15 @@
 
 
     var controllerId = 'handmodal';
-    angular.module('mtgApp').controller(controllerId, ['logger', '$scope', 'fullDeck', 'deckFunctions', '$mdDialog', handmodal]);
+    angular.module('mtgApp').controller(controllerId, ['logger', '$scope', 'fullDeck', 'deckFunctions', 'datacontext', '$mdDialog', handmodal]);
 
-    function handmodal(logger, $scope, fullDeck, deckFunctions, $mdDialog) {
+    function handmodal(logger, $scope, fullDeck, deckFunctions, datacontext, $mdDialog) {
 
         var vm = this;
 
-        vm.fullDeck = fullDeck;
+        vm.fullDeck = fullDeck.map(function(card) {
+            return new datacontext.copyCard(card);
+        });
         vm.currentCards = 7;
 
         var remainingCards = [];
@@ -97,7 +99,16 @@
                 log.logError("There are no more cards to draw");
             }
             trackEvent(controllerId, 'draw-next-card');
-        }
+        };
+
+        $scope.markAsUsed = function(card) {
+            if (!card.isUsed) {
+                card.isUsed = true;
+            } else {
+                card.isUsed = false;
+            }
+
+        };
 
     }
 

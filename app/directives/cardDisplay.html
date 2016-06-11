@@ -29,13 +29,15 @@
             <div class="imgHolder">
               <img ng-click="cardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
             </div>
-            <span ng-click="cardClick({card: card})" ng-if="card.isFoil == true" class="foil">FOIL</span>
+            <span ng-click="cardClick({card: card})" ng-if="card.isFoil == true && !card.isUsed" class="foil">FOIL</span>
+            <span ng-click="cardClick({card: card})" ng-if="card.isUsed == true" class="foil">USED</span>
         </li>
         <li data-ng-repeat="card in landCards track by $index">
             <div class="imgHolder">
               <img ng-click="landCardClick({card: card})" src="{{card.Image}}" class="mtgCard" alt="{{card.Name}}" />
             </div>
-            <span ng-click="landCardClick({card: card})" data-ng-if="card.isFoil == true" class="foil">FOIL</span>
+            <span ng-click="landCardClick({card: card})" data-ng-if="card.isFoil == true && !card.isUsed" class="foil">FOIL</span>
+            <span ng-click="cardClick({card: card})" ng-if="card.isUsed == true" class="foil">USED</span>
         </li>
     </ul>
 </md-card>
