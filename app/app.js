@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var app = angular.module('mtgApp', ['ngMaterial', 'ngRoute']);
+  var app = angular.module('mtgApp', ['ngMaterial', 'ngRoute', 'ngAnimate']);
 
   app.config(function($mdThemingProvider, $mdIconProvider) {
 

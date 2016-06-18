@@ -31,9 +31,14 @@
     </div> -->
 
     <div class="c-filter" ng-if="allowFilters == 'true'">
-        <h3>Filters</h3>
-        <div class="c-filter__group" ng-repeat="filterGroup in filters">
-            <md-button class="c-filter__btn" ng-class="{'md-primary c-filter__btn--active': filterGroup.filters.indexOf(filter.value) > -1}" ng-repeat="filter in filterGroup.possibleFilters" ng-click="filter.filterFunc()">{{filter.value}}</md-button>
+        <div class="c-filter__inner">
+            <md-button ng-click="toggleFilters()">Filters <i ng-class="!filtersVisible ? 'fa-chevron-down': 'fa-chevron-up'" class="fa"></i></md-button>
+            <md-button class="c-filter__clear-btn c-filter__btn--active" ng-show="filtersApplied" ng-click="clearFilters()">Clear filters</md-button>
+            <div ng-show="filtersVisible" class="c-filter_all-filters">
+                <div class="c-filter__group" ng-repeat="filterGroup in filters">
+                    <md-button class="c-filter__btn" ng-class="{'md-primary c-filter__btn--active': filterGroup.filters.indexOf(filter.value) > -1}" ng-repeat="filter in filterGroup.possibleFilters" ng-click="filter.filterFunc()">{{filter.label}}</md-button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -43,14 +48,14 @@
             <ul class="card-list">
                 <li ng-repeat ="card in sortedSection track by $index">
                     <div class="imgHolder">
-                      <img ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false"  ng-click="cardClick({card: card})" ng-src="{{card.isReversed?card.ReverseImage:card.Image}}" class="mtgCard" alt="{{card.Name}}" />
+                      <img ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false"  ng-click="cardDisplayClicked(card)" ng-src="{{card.ReverseImage != null && card.isReversed?card.ReverseImage:card.Image}}" class="mtgCard" alt="{{card.Name}}" />
                       <md-button ng-show="card.ReverseImage" class="md-fab md-primary mtgCard__flipper" ng-click="reverseCard(card)" aria-label="Flip card">
                         <md-icon class="fa fa-repeat fa-2x"></md-icon>
                       </md-button>
                     </div>
 
-                    <span ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false" ng-click="cardClick({card: card})" ng-if="card.isFoil == true" class="foil">FOIL</span>
-                    <span ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false"  ng-click="cardClick({card: card})" ng-if="card.isUsed == true" class="foil">USED</span>
+                    <span ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false" ng-click="cardDisplayClicked(card)" ng-if="card.isFoil == true" class="foil">FOIL</span>
+                    <span ng-mouseover="card.isReversed = true" ng-mouseout="card.isReversed = false"  ng-click="cardDisplayClicked(card)" ng-if="card.isUsed == true" class="foil">USED</span>
                 </li>
             </ul>
             <div ng-show="!sortedSection.length">

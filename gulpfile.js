@@ -12,7 +12,7 @@ var paths = {
   styles: {
       src: './css/sass',
       files: './css/sass/*.scss',
-      dest: './css'
+      dest: './dist'
   }
 };
 
@@ -37,7 +37,10 @@ var displayError = function(error) {
 // Setting up the sass task
 gulp.task('sass', function (){
     // Taking the path from the above object
-    gulp.src(paths.styles.files)
+    gulp.src([
+        './bower_components/angular-material/angular-material.min.css',
+        './css/font-awesome.min.css',
+        paths.styles.files])
     // Sass options - make the output compressed and add the source map
     // Also pull the include path from the paths object
     .pipe(sass({
@@ -45,6 +48,7 @@ gulp.task('sass', function (){
         sourceComments: 'map',
         includePaths : [paths.styles.src]
     }))
+    .pipe(concat('app.css'))
     // If there is an error, don't stop compiling but use the custom displayError function
     .on('error', function(err){
         displayError(err);
@@ -53,23 +57,24 @@ gulp.task('sass', function (){
     .pipe(prefix(
         'last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'
     ))
+    .pipe(minifyCss())
     // Funally put the compiled sass into a css file
     .pipe(gulp.dest(paths.styles.dest));
 
 
 
-    var cssToCombine = [
-      './bower_components/angular-material/angular-material.min.css',
-      './css/font-awesome.min.css',
-      './css/app.css'
-    ];
-
-    gulp.src(cssToCombine)
-      .pipe(concat('app.css'))
-      .pipe(gulp.dest('dist'))
-      .pipe(rename('app.min.css'))
-      .pipe(minifyCss())
-      .pipe(gulp.dest('dist'))
+    // var cssToCombine = [
+    //   './bower_components/angular-material/angular-material.min.css',
+    //   './css/font-awesome.min.css',
+    //   './css/app.css'
+    // ];
+    //
+    // gulp.src(cssToCombine)
+    //   .pipe(concat('app.css'))
+    //   .pipe(gulp.dest('dist'))
+    //   .pipe(rename('app.min.css'))
+    //   .pipe(minifyCss())
+    //   .pipe(gulp.dest('dist'))
 
 });
 
@@ -173,6 +178,18 @@ gulp.task('scripts', function(cb) {
         .pipe(rename('vendor.min.js'))
         .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('watch', function() {
+    gulp.watch(paths.styles.files, ['sass'])
+    // Also when there is a change, display what file was changed, only showing the path after the 'sass folder'
+    .on('change', function(evt) {
+        console.log(
+            '[watcher] File ' + evt.path.replace(/.*(?=sass)/,'') + ' was ' + evt.type + ', compiling...'
+        );
+    });
+
+    // gulp.watch(['./app/**/*.js', './app/*.js'], ['scripts']);
 });
 
 // This is the default task - which is run when `gulp` is run

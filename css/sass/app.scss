@@ -321,6 +321,7 @@ $graphColumnWidth: 425px;
 }
 .cardMargins {
   margin:1rem;
+  padding-bottom: 1rem;
 }
 .cardPanelTitle {
   text-align: center;
@@ -500,18 +501,46 @@ $filterBorder: 1px solid $filterBorderColor;
 .c-filter {
     margin-left: 20px;
     margin-right: 20px;
-    max-width: 800px;
-    margin: auto;
+    position: relative;
 }
+
+    .c-filter__inner {
+        margin: auto;
+        max-width: 800px;
+    }
+
+    .c-filter_all-filters {
+        overflow-y: hidden;
+        transition: max-height ease-out 0.5s;
+        max-height: 800px;
+
+        &.ng-hide-add, &.ng-hide-remove {
+            display: block !important;
+        }
+
+        &.ng-hide {
+          max-height: 0;
+        }
+    }
+
+    .c-filter__clear-btn {
+        position: absolute;
+        right: 0;
+    }
 
     .c-filter__group {
         border-top: $filterBorder;
         padding-top: 20px;
         padding-bottom: 20px;
+          transition: all linear 0.5s;
 
         &:last-child {
             border-bottom: $filterBorder;
         }
+    }
+
+    .c-filter__menu {
+        width: 100%;
     }
 
     .c-filter__btn {

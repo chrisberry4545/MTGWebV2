@@ -35,7 +35,8 @@
                       title="{{vm.topPanelCardsTitle}} ({{vm.deckCards.length + vm.selectedLandCards.length}})"
                       instructions="The draft is complete. You can build a deck by clicking the cards you want from your card pool."
                       show-save="true"
-                      allow-test-hands="true" />
+                      allow-test-hands="true"
+                      allow-filters="true" />
       </div>
 
       <div ng-if="vm.draftStarted">
@@ -44,6 +45,7 @@
                       cards="vm.selectedCards"
                       land-cards="vm.landcards"
                       land-card-click="vm.landCardClick(card)"
+                      allow-filters="true"
                       />
       </div>
 
