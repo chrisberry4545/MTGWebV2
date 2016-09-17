@@ -91,6 +91,21 @@
         function generateCardSetGroup() {
             return [
                 [
+                    new CardSet('Kaladesh', 'KLD', null, null, function(allCardsInSet, cardsInPack) {
+
+                        var chanceOfMasterpiece = 1 / 144; // Chance is 1 out of 144 boosters
+
+                        if (Math.random() < chanceOfMasterpiece) {
+                            var masterpieceSet = window['KLDMaster'];
+                            var masterPieceCard = selectRandomValueFromArray(masterpieceSet);
+                            cardsInPack.mythicCards.unshift(masterPieceCard);
+                        }
+
+                        return cardsInPack;
+
+                    })
+                ],
+                [
 
                     new CardSet('Eldritch Moon', 'EMN', null, null, function(allCardsInSet, cardsInPack) {
 

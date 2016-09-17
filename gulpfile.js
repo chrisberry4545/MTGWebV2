@@ -121,6 +121,8 @@ gulp.task('minimages', function(cb) {
     './app/directives/poolSummaryCharts.js',
     './app/directives/setSelection.js',
     './app/directives/optionsMenu.js',
+    './app/carddata/CardsKLD.js',
+    './app/carddata/CardsKLDMaster.js',
     './app/carddata/CardsEMN.js',
     './app/carddata/CardsEMA.js',
     './app/carddata/CardsSOI.js',

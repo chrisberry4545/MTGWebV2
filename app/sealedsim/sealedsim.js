@@ -18,8 +18,15 @@
         vm.setGroups = [];
         function initSetGroups() {
             datacontext.getCardSetGroups().then(function (data) {
-                data[0][0].boostersToOpen = 6; //Set latest set to open 6 boosters by default
-                // data[0][1].boostersToOpen = 2;
+                var latestSetGroup = data[0];
+                if (latestSetGroup.length > 1) {
+                    // If latest set group has more than one set in it then open 4 of latest, 2 of older.
+                    data[0][0].boostersToOpen = 4;
+                    data[0][1].boostersToOpen = 2;
+                } else {
+                    // Else open 6 of latest if it just has one set in it.
+                    data[0][0].boostersToOpen = 6;
+                }
                 vm.setGroups = data;
             });
         }

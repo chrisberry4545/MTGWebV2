@@ -43,8 +43,14 @@
     vm.fixedSetGroups = [];
     function initSetGroups() {
         datacontext.getCardSetGroups().then(function (data) {
-            data[0][0].boostersToOpen = 2; //Set latest set to open 6 boosters by default
-            data[0][1].boostersToOpen = 1;
+            // Default cards to open
+            var latestSetGroup = data[0];
+            if (latestSetGroup.length > 1) {
+                data[0][0].boostersToOpen = 2; // If 2 sets in lastest group then latests booster has 2 boosters to open and older set has 1 booster.
+                data[0][1].boostersToOpen = 1;
+            } else {
+                data[0][0].boostersToOpen = 3; // If only one set in group then use 3 boosters in draft.
+            }
             vm.setGroups = data;
             trackEvent(controllerId, 'init');
         });
