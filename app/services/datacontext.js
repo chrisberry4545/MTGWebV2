@@ -91,32 +91,57 @@
         function generateCardSetGroup() {
             return [
                 [
-                    new CardSet('Eternal Masters', 'EMA')
+
+                    new CardSet('Eldritch Moon', 'EMN', null, null, function(allCardsInSet, cardsInPack) {
+
+                        var rareAndMythicFlipCards = [175, 177, 185, 199, 200, 203, 204];
+                        var commonAndUncommonFlipCards = [172, 173, 174, 176, 178, 179, 180, 181, 182, 183, 184, 186, 201, 202];
+
+                        var chanceOfRareOrMythicFlip = 1 / 8;
+                        var random = Math.random();
+                        if (random < chanceOfRareOrMythicFlip) {
+                            cardsInPack.commonCards.shift(); //Replaces a common
+                            var randCard = EMN[selectRandomValueFromArray(rareAndMythicFlipCards)];
+                            addCardToCorrectPartOfCards(randCard, cardsInPack);
+                        } else {
+                            var commonOrUncommonFlipCard = EMN[selectRandomValueFromArray(commonAndUncommonFlipCards)];
+                            // if (commonOrUncommonFlipCard.Rarity == 'U') {
+                            //     cardsInPack.uncommonCards.shift();
+                            // } else {
+                                cardsInPack.commonCards.shift();
+                            // }
+                            addCardToCorrectPartOfCards(commonOrUncommonFlipCard, cardsInPack);
+                        }
+
+                        return cardsInPack;
+                    }),
+
+                    new CardSet('Shadows over Innistrad', 'SOI', null, null, function(allCardsInSet, cardsInPack) {
+
+                        var rareAndMythicFlipCards = [4, 20, 87, 91, 107, 158, 224, 242, 280];
+                        var commonAndUncommonFlipCards = [5, 33, 45, 48, 53, 93, 96, 115, 118, 146, 148, 157, 168, 181, 189, 193, 202, 208, 209, 214, 228, 255, 259, 265];
+
+                        var chanceOfRareOrMythicFlip = 1 / 8;
+                        var random = Math.random();
+                        if (random < chanceOfRareOrMythicFlip) {
+                            cardsInPack.commonCards.shift(); //Replaces a common
+                            var randCard = SOI[selectRandomValueFromArray(rareAndMythicFlipCards)];
+                            addCardToCorrectPartOfCards(randCard, cardsInPack);
+                        }
+
+                        var commonOrUncommonFlipCard = SOI[selectRandomValueFromArray(commonAndUncommonFlipCards)];
+                        if (commonOrUncommonFlipCard.Rarity == 'U') {
+                            cardsInPack.uncommonCards.shift();
+                        } else {
+                            cardsInPack.commonCards.shift();
+                        }
+                        addCardToCorrectPartOfCards(commonOrUncommonFlipCard, cardsInPack);
+
+                        return cardsInPack;
+                    })
                 ],
                 [
-                  new CardSet('Shadows over Innistrad', 'SOI', null, null, function(allCardsInSet, cardsInPack) {
-
-                    var rareAndMythicFlipCards = [4, 20, 87, 91, 107, 158, 224, 242, 280];
-                    var commonAndUncommonFlipCards = [5, 33, 45, 48, 53, 93, 96, 115, 118, 146, 148, 157, 168, 181, 189, 193, 202, 208, 209, 214, 228, 255, 259, 265];
-
-                    var chanceOfRareOrMythicFlip = 1 / 8;
-                    var random = Math.random();
-                    if (random < chanceOfRareOrMythicFlip) {
-                      cardsInPack.commonCards.shift(); //Replaces a common
-                      var randCard = SOI[selectRandomValueFromArray(rareAndMythicFlipCards)];
-                      addCardToCorrectPartOfCards(randCard, cardsInPack);
-                    }
-
-                    var commonOrUncommonFlipCard = SOI[selectRandomValueFromArray(commonAndUncommonFlipCards)];
-                    if (commonOrUncommonFlipCard.Rarity == 'U') {
-                      cardsInPack.uncommonCards.shift();
-                    } else {
-                      cardsInPack.commonCards.shift();
-                    }
-                    addCardToCorrectPartOfCards(commonOrUncommonFlipCard, cardsInPack);
-
-                    return cardsInPack;
-                  })
+                    new CardSet('Eternal Masters', 'EMA')
                 ],
                 [
                   new CardSet('Oath of the Gatewatch', 'OGW', null, null, function (allCardsInSet, cardsInPack) {
